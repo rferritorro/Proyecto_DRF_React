@@ -1,0 +1,8 @@
+.footerComponent {
+    background-color: rgb(244, 249, 250);
+    padding: 2%;
+    text-align: center;
+    position: relative;
+    bottom: 0;
+    width: 96%;
+}
