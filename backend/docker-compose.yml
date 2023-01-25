@@ -6,9 +6,8 @@ services:
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root
-      PGDATA: /data/postgres
     volumes:
-       - postgres:/data/postgres
+      - ../data/database.sql:/docker-entrypoint-initdb.d/database.sql
     ports:
       - "5432:5432"
     networks:
