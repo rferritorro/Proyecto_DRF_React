@@ -16,11 +16,13 @@ const HeaderComponent = () => {
                     <Link to={"/stations"} className="header_decoration">
                         <strong>Stations</strong>
                     </Link>
-                    <Link to={"/"} className="header_decoration">
+                    <Link to={"/about"} className="header_decoration">
                         <strong>About</strong>
                     </Link>
                 </div>
-                <img className="avatar" src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"/>
+                <Link to={"/"}>
+                    <img className="avatar" src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"/>
+                </Link>
             </div>
         </div>
     )

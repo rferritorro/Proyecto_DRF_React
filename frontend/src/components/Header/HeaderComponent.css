@@ -29,7 +29,6 @@
         font-size: 30px;
         gap: 270px;
     }
-    
 }
 
 .headerComponent {
@@ -62,6 +61,5 @@
 }
 
 .avatar {
-    width: 5%;
-    
+    width: 60%;
 }
