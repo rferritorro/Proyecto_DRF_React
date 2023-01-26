@@ -7,7 +7,7 @@ const HeaderComponent = () => {
         <div className="headerComponent">
             <div className="principalMain">
                 <Link to={"/"}>
-                    <img className="logo" src="https://e7.pngegg.com/pngimages/873/949/png-clipart-bicycle-orbea-mountain-bike-cycling-29er-cyclist-logo-white-text.png"/>
+                    <img className="logo" src="./logo_biosbike.png"/>
                 </Link>
                 <div className="infor">
                     <Link to={"/"} className="header_decoration">

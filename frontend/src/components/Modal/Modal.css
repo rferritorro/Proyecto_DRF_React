@@ -1,0 +1,39 @@
+.modal, .modal2 {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 10%;
+    height: 10%;
+    padding: 10%;
+    margin: 15%;
+    margin-left: 35%;
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+    pointer-events: none;
+}
+
+
+.imglogo {
+    width: 500%;
+
+}
+
+.modal2 {
+    background-color: rgb(128, 255, 255);
+}
+
+
+
+.modal.show, .modal2.show {
+    opacity: 1;
+    pointer-events: visible;
+}
+
+.welcome {
+    text-align: justify;
+}
