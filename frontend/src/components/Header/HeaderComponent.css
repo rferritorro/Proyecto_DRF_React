@@ -1,25 +1,39 @@
+@media only screen and (max-width: 760px ) {    
+    .principalMain {
+        gap: 10px;
+    }
+    
+    .infor {
+        font-size: 100px;
+        gap: 10px;
+    }
+    .logo {
+        width: 58%;
+    }
+    
+    .avatar {
+        width: 60%;
+    }
+    
+}
+
 @media only screen and (max-width: 1900px ) {
     .principalMain {
-        gap: 100px;
+        gap: 180px;
     }
     .infor {
         font-size: 20px;
         gap: 130px;
     }
-    
-}
-@media only screen and (max-width: 760px ) {    
-    .principalMain {
-        gap: 35px;
+    .logo {
+        width: 18%;
     }
     
-    .infor {
-        font-size: 20px;
-        gap: 80px;
+    .avatar {
+        width: 20%;
     }
-
+    
 }
-
 @media only screen and (min-width: 1900px ) {     
     .principalMain {
         gap: 350px;
@@ -28,6 +42,13 @@
     .infor {
         font-size: 30px;
         gap: 270px;
+    }
+    .logo {
+        width: 40%;
+    }
+    
+    .avatar {
+        width: 50%;
     }
 }
 
@@ -56,10 +77,3 @@
     text-align: center;
 }
 
-.logo {
-    width: 58%;
-}
-
-.avatar {
-    width: 60%;
-}

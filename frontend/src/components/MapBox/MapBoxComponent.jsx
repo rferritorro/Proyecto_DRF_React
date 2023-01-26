@@ -12,7 +12,7 @@ const MapBoxComponent = () => {
     return (
         <div className="mapBoxComponent">
             <div className="map-container" >
-                {/* <Map
+                <Map
                     initialViewState={{
                         longitude: -0.604441,
                         latitude: 38.810384,
@@ -21,7 +21,7 @@ const MapBoxComponent = () => {
                     mapStyle="mapbox://styles/mapbox/streets-v12"
                 >
                     <Marker longitude={-0.604441} latitude={38.810384} anchor={"bottom"} color={"blue"} />
-                </Map> */}
+                </Map>
             </div>
         </div>
     )
