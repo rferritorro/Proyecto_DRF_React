@@ -23,18 +23,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-p#@dw-g_c3n0!cj6#j)f&g2uzh&%l^lmb6f0!ivr^oe=2ul_5f'
+SECRET_KEY = data_env["SECRETDJANGO"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0']
+ALLOWED_HOSTS = ['localhost','127.0.0.1']
 
 
 # Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
+    'server',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -76,14 +77,24 @@ WSGI_APPLICATION = 'server.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+# 		'ENGINE ': 'django.db.backends.postgresql_psycopg2',
+# 		'NAME' : data_env["NAMEDB"],
+# 		'USER' : data_env["USERDB"],
+# 		'PASSWORD' : data_env["PASSWORDDB"],
+# 		'HOST' : data_env["HOSTDB"],
+# 		'PORT' : data_env["PORTDB"]
+#     }
+# }
 DATABASES = {
     'default': {
-		'ENGINE ': 'django.db.backends.postgresql_psycopg2',
-		'NAME' : data_env["NAMEDB"],
-		'USER' : data_env["USERDB"],
-		'PASSWORD' : data_env["PASSWORDDB"],
-		'HOST' : data_env["HOSTDB"],
-		'PORT' : data_env["PORTDB"]
+        'ENGINE' : 'django.db.backends.postgresql',
+        'NAME' : 'root',
+        'USER' : 'root',
+        'PASSWORD' : 'root',
+        'HOST' : 'localhost',
+        'PORT' : '5432'
     }
 }
 

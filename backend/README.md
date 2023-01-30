@@ -7,3 +7,6 @@ python manage.py runserver
 
 <!-- install dotenv -->
 pip install python-dotenv
+
+
+pip install djangorestframework
