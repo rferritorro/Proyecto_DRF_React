@@ -1,6 +1,6 @@
 from pyexpat import model
 from rest_framework import serializers
-from ..models.model_profile import Profile
+from .models import Profile
 import json
 from django.core.serializers import serialize
 
@@ -16,9 +16,7 @@ class ProfileSerializer(serializers.ModelSerializer):
         }
     
     def getProfile(context):
-
         queryset = Profile.objects.filter(id = context['id'])
-
         serialized_profile = []
 
         for profile in queryset.iterator():
