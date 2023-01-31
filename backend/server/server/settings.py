@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'server.app.profile.ProfileAppConfig',
     'server.app.user.UserAppConfig',
     'server.app.station.StationAppConfig',
+    'server.app.slots.SlotAppConfig',
     'corsheaders',
     'django.contrib.auth',
     'django.contrib.contenttypes',

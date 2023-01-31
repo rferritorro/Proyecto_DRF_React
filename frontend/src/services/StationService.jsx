@@ -2,7 +2,7 @@ import http from "./http"
 
 const StationService = {
     getStation() {
-        return http().get("/server/stations")
+        return http().get("/server/station")
     }
 }
 

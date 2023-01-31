@@ -7,7 +7,6 @@ import Stations from './pages/Stations'
 import About from './pages/About/About'
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
-
 function App() {
   return (
     <div>
@@ -21,6 +20,7 @@ function App() {
         <Footer />
       </BrowserRouter>
     </div>
+    
   );
  
 }
