@@ -15,4 +15,5 @@ class StationSerializer(serializers.ModelSerializer):
             'name': instance.name,
             'lat': instance.lat,
             'long': instance.long,
+            'img': instance.img
         }

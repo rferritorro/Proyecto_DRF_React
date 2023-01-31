@@ -3,8 +3,6 @@ import "./Modal.css"
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-
-
 const ModalComponent = (props) => {
     if (!props.show) {
         return null
@@ -18,6 +16,7 @@ const ModalComponent = (props) => {
             <img className="imglogo" src="logo_biosbike.png" />
         </Modal>  
     }
+    console.log(props)
     if (props.info) {
         bkng = <Modal show={props.show} onHide={props.onClose} size="lg"
         aria-labelledby="contained-modal-title-vcenter"
@@ -26,9 +25,13 @@ const ModalComponent = (props) => {
                 <Modal.Title>STATION {props.info?.id}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <p>{props.info?.name}</p>
+                <p>
+                    <strong>
+                    {props.info?.name}
+                    </strong>
+                </p>
                 <p>Slots: {props.info?.bikes}</p>
-                <img src="https://lh5.googleusercontent.com/p/AF1QipMgSoB8onS6A3ozE2-2TJJml8467gY-349HZjX6=w408-h306-k-no"/>
+                <img className="w-75" src={props.info.img}/>
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={props.onClose}>
