@@ -3,30 +3,34 @@ import './MapBoxComponent.css';
 import mapboxgl from 'mapbox-gl';
 import {Map, Marker, Popup} from 'react-map-gl';
 import secret from "../../secret"
+//import Button from 'react-bootstrap/Button';
+import Modal from '../../components/Modal/Modal'
+//import Modal from 'react-bootstrap/Modal';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
 const MapBoxComponent = (props) => {
     mapboxgl.accessToken = secret.MAPBOX_TOKEN;
-    const [show, setShow] = useState(false)
+    const [show, setShow] = useState(false);
+    const [info, setInfo] = useState();
+   
+    console.log(props)
+    const handleShow = () => setShow(true);
     return (
         <div className="map-container" >
             <Map
                 initialViewState={{
-                    longitude: props.data.long,
-                    latitude: props.data.lat,
-                    zoom: 15
+                    longitude: -0.6052881,
+                    latitude: 38.8234127,
+                    zoom: 13
                 }}
                 mapStyle="mapbox://styles/mapbox/streets-v12"
             >
-                <Marker longitude={props.data.long} latitude={props.data.lat} anchor={"bottom"} color={"blue"} onClick={()=> setShow(true)}/>
-                {(() => {
-                    if (show) {
-                        console.log(show);
-                        return (
-                            <Popup longitude={props.data.long} latitude={props.data.lat}>
-                                Hello
-                            </Popup>
-                        )
-                    }
-                })()}
+                {props.data?.map((data, index) => (
+                    <Marker longitude={data.long} latitude={data.lat} anchor={"bottom"} color={"blue"} onClick={()=> {setShow(1); setInfo(data); handleShow()}}/>
+                ))}
+                <Modal onClose={() => setShow(false)} show={show} info={info}></Modal>
+                {/* <Modal onClose={() => setShow(false)} show={show} info={info}/> */}
             </Map>
         </div>
 

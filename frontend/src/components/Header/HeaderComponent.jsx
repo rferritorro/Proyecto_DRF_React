@@ -1,6 +1,8 @@
 import React from "react";
 import './HeaderComponent.css'
 import {Link} from 'react-router-dom'
+import {FaUserCircle} from 'react-icons/fa'
+//import {AiOutlineNotification} from "react-icons/ai"
 
 const HeaderComponent = () => {
     return (
@@ -19,9 +21,11 @@ const HeaderComponent = () => {
                     <Link to={"/about"} className="header_decoration">
                         <strong>About</strong>
                     </Link>
+                    {/* <AiOutlineNotification style={{fontSize: "20px"}}/> */}
                 </div>
                 <Link to={"/"}>
-                    <img className="avatar" src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"/>
+                    <FaUserCircle style={{fontSize: "90px"}}/>
+                    {/* <img className="avatar" src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"/> */}
                 </Link>
             </div>
         </div>

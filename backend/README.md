@@ -10,3 +10,6 @@ pip install python-dotenv
 
 
 pip install djangorestframework
+
+<!-- install cors -->
+pip install django-cors-headers
