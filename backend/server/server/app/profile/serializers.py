@@ -1,6 +1,6 @@
 from pyexpat import model
 from rest_framework import serializers
-from .models import Profile
+from ..user.models import Profile
 import json
 from django.core.serializers import serialize
 
