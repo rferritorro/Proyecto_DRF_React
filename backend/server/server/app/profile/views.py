@@ -2,7 +2,7 @@
 # from ..models import Profile
 from rest_framework.response import Response
 from rest_framework import status, viewsets
-from ..serializes.serialize_profile import ProfileSerializer
+from .serializers import ProfileSerializer
 
 class ProfileView(viewsets.GenericViewSet):
 
