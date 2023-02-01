@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useCallback, useState } from "react";
 import StationService from "../services/StationService";
 
 export function useStation() {
@@ -10,7 +10,14 @@ export function useStation() {
         })
     }, [setStation])
 
+    const createStation = useCallback((data) => {
+        StationService.addStation(data)
+        .then(({data}) => {
+            console.log(data)
+        })
+    }, [])
+
     return {
-        station: station
+        station: station, createStation
     }
 }

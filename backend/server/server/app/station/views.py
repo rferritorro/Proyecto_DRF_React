@@ -16,3 +16,10 @@ class StationView(viewsets.GenericViewSet):
         #     data = serializer_data
         # )
         return Response({"ADDED NEW STATION SUCCESFULL"}, status=status.HTTP_201_CREATED)
+    def UpdateStation(self, request):
+        serializer_data = request.data
+        StationSerializer.UpdateStation(data=serializer_data)
+        # serializer = self.serializer_class(
+        #     data = serializer_data
+        # )
+        return Response({"STATION UPDATED SUCCESFULL"}, status=status.HTTP_201_CREATED)

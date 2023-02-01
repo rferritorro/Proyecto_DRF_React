@@ -29,7 +29,7 @@ SECRET_KEY = data_env["SECRETDJANGO"]
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','127.0.0.1']
+ALLOWED_HOSTS = ['localhost','127.0.0.1', '192.168.1.26']
 
 
 # Application definition
@@ -82,6 +82,7 @@ WSGI_APPLICATION = 'server.wsgi.application'
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
+    'http://192.168.1.26:3000',
 ]
 
 # Database
@@ -110,6 +111,7 @@ DATABASES = {
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
+    'http://192.168.1.26:3000',
 ]
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

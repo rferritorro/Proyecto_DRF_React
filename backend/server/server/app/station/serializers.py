@@ -20,6 +20,15 @@ class StationSerializer(serializers.ModelSerializer):
         }
     def CreateStation(data):
         station = Station.objects.create(
+           
+            name = data["name"],
+            long = data["long"],
+            lat = data["lat"],
+            img = data["img"]
+        )
+        return station
+    def UpdateStation(data):
+        station = Station.objects.update(
             id = data["id"],
             name = data["name"],
             long = data["long"],

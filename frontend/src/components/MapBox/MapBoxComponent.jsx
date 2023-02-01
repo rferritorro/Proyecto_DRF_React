@@ -13,10 +13,20 @@ const MapBoxComponent = (props) => {
     mapboxgl.accessToken = secret.MAPBOX_TOKEN;
     const [show, setShow] = useState(false);
     const [info, setInfo] = useState();
-   
-    console.log(props)
-    const handleShow = () => setShow(true);
-    return (
+    let marker_red;
+    let map_complet;
+    const [coordinate, setCoordinate] = useState();
+        const clickMap = (event) => {
+            if (props.newStation) {
+                props.lat(event.lngLat)
+                setCoordinate(event.lngLat)
+                
+            }
+        }
+    if (coordinate) {
+        marker_red = <Marker longitude={coordinate?.lng} latitude={coordinate?.lat} anchor={"bottom"} color={"red"}/>
+    }
+    map_complet = 
         <div className="map-container" >
             <Map
                 initialViewState={{
@@ -25,16 +35,20 @@ const MapBoxComponent = (props) => {
                     zoom: 13
                 }}
                 mapStyle="mapbox://styles/mapbox/streets-v12"
+                onClick={clickMap}
             >
                 {props.data?.map((data, index) => (
-                    <Marker longitude={data.long} latitude={data.lat} anchor={"bottom"} color={"blue"} onClick={()=> {setShow(1); setInfo(data); handleShow()}}/>
+                    <Marker longitude={data.long} latitude={data.lat} anchor={"bottom"} color={"blue"} onClick={() => { setShow(1); setInfo(data); handleShow() }} />
                 ))}
                 <Modal onClose={() => setShow(false)} show={show} info={info}></Modal>
+                {marker_red}
                 {/* <Modal onClose={() => setShow(false)} show={show} info={info}/> */}
             </Map>
-        </div>
+        </div>;
 
-    )
+    console.log(coordinate)
+    const handleShow = () => setShow(true);
+    return (map_complet)
 
 };
 
