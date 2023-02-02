@@ -1,0 +1,18 @@
+.stationsDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.stationsDivMap {
+    height: 600px;
+    width: 400px;
+    margin: 2%;
+    background-color: rgb(214, 253, 253);
+}
+
+.stationDescr {
+    text-align: center;
+    font-size: 140%;
+    font-family: Arial, Helvetica, sans-serif;
+}

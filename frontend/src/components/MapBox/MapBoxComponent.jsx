@@ -1,30 +1,54 @@
 import React, { useState } from "react";
 import './MapBoxComponent.css';
 import mapboxgl from 'mapbox-gl';
-import {Map, Marker} from 'react-map-gl';
+import {Map, Marker, Popup} from 'react-map-gl';
 import secret from "../../secret"
-const MapBoxComponent = () => {
+//import Button from 'react-bootstrap/Button';
+import Modal from '../../components/Modal/Modal'
+//import Modal from 'react-bootstrap/Modal';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
+const MapBoxComponent = (props) => {
     mapboxgl.accessToken = secret.MAPBOX_TOKEN;
-    // //const [setStyles] = useState();
-    // const setStyles = ({
-    //     style: "streets-v12"
-    // })
-    return (
-        <div className="mapBoxComponent">
-            <div className="map-container" >
-                <Map
-                    initialViewState={{
-                        longitude: -0.604441,
-                        latitude: 38.810384,
-                        zoom: 15
-                    }}
-                    mapStyle="mapbox://styles/mapbox/streets-v12"
-                >
-                    <Marker longitude={-0.604441} latitude={38.810384} anchor={"bottom"} color={"blue"} />
-                </Map>
-            </div>
-        </div>
-    )
+    const [show, setShow] = useState(false);
+    const [info, setInfo] = useState();
+    let marker_red;
+    let map_complet;
+    const [coordinate, setCoordinate] = useState();
+        const clickMap = (event) => {
+            if (props.newStation) {
+                props.lat(event.lngLat)
+                setCoordinate(event.lngLat)
+                
+            }
+        }
+    if (coordinate) {
+        marker_red = <Marker longitude={coordinate?.lng} latitude={coordinate?.lat} anchor={"bottom"} color={"red"}/>
+    }
+    map_complet = 
+        <div className="map-container" >
+            <Map
+                initialViewState={{
+                    longitude: -0.6052881,
+                    latitude: 38.8234127,
+                    zoom: 13
+                }}
+                mapStyle="mapbox://styles/mapbox/streets-v12"
+                onClick={clickMap}
+            >
+                {props.data?.map((data, index) => (
+                    <Marker longitude={data.long} latitude={data.lat} anchor={"bottom"} color={"blue"} onClick={() => { setShow(1); setInfo(data); handleShow() }} />
+                ))}
+                <Modal onClose={() => setShow(false)} show={show} info={info}></Modal>
+                {marker_red}
+                {/* <Modal onClose={() => setShow(false)} show={show} info={info}/> */}
+            </Map>
+        </div>;
+
+    console.log(coordinate)
+    const handleShow = () => setShow(true);
+    return (map_complet)
 
 };
 

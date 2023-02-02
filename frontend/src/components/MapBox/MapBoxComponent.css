@@ -1,14 +1,5 @@
-.mapBoxComponent {
-    display: flex;
-    justify-content: center;
-    flex-flow: row nowrap;
-    align-items: stretch;
-}
-
 .map-container {
-    flex-direction: row-reverse;
-    height: 400px;
-    width: 400px;
+    height: 800px;
+    width: 95%;
     margin: 2%;
-    background-color: black;
 }

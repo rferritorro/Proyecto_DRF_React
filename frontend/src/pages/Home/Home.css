@@ -2,3 +2,21 @@
   background-size: cover;
   padding: 20%;
 }
+
+.category {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.categorys {
+  border: 1px solid rgb(207, 250, 255);
+  margin: 5%;
+  padding: 5%;
+  width: 30%;
+  text-align: center;
+}
+
+.categorys:hover {
+  border: 3px solid rgb(207, 250, 255);
+}
