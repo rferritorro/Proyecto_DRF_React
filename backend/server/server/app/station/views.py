@@ -1,4 +1,5 @@
 from rest_framework.response import Response
+from rest_framework.exceptions import NotFound
 from rest_framework import viewsets, status
 from .models import Station
 from .serializers import StationSerializer
@@ -23,3 +24,11 @@ class StationView(viewsets.GenericViewSet):
         #     data = serializer_data
         # )
         return Response({"STATION UPDATED SUCCESFULL"}, status=status.HTTP_201_CREATED)
+    def DeleteStation(self, request, id):
+        try:
+            station = Station.objects.get(id=id)
+        except Station.DoesNotExist:
+            raise NotFound('A station with this id does not exist.')
+
+        station.delete()
+        return Response({"STATION DELETED"}, status=status.HTTP_204_NO_CONTENT)

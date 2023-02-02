@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import './MapBoxComponent.css';
 import mapboxgl from 'mapbox-gl';
-import {Map, Marker, Popup} from 'react-map-gl';
+import {Map, Marker} from 'react-map-gl';
 import secret from "../../secret"
 //import Button from 'react-bootstrap/Button';
 import Modal from '../../components/Modal/Modal'
 //import Modal from 'react-bootstrap/Modal';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 
 const MapBoxComponent = (props) => {
@@ -17,15 +18,14 @@ const MapBoxComponent = (props) => {
     let map_complet;
     const [coordinate, setCoordinate] = useState();
         const clickMap = (event) => {
-            if (props.newStation) {
-                props.lat(event.lngLat)
-                setCoordinate(event.lngLat)
-                
-            }
+            props.lat(event.lngLat)
+            setCoordinate(event.lngLat)              
         }
     if (coordinate) {
         marker_red = <Marker longitude={coordinate?.lng} latitude={coordinate?.lat} anchor={"bottom"} color={"red"}/>
     }
+    
+    console.log(props)
     map_complet = 
         <div className="map-container" >
             <Map
@@ -40,7 +40,7 @@ const MapBoxComponent = (props) => {
                 {props.data?.map((data, index) => (
                     <Marker longitude={data.long} latitude={data.lat} anchor={"bottom"} color={"blue"} onClick={() => { setShow(1); setInfo(data); handleShow() }} />
                 ))}
-                <Modal onClose={() => setShow(false)} show={show} info={info}></Modal>
+                <Modal onClose={() => setShow(false)} show={show} info={info} admin={props?.admin}></Modal>
                 {marker_red}
                 {/* <Modal onClose={() => setShow(false)} show={show} info={info}/> */}
             </Map>

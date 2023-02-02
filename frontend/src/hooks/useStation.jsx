@@ -17,7 +17,14 @@ export function useStation() {
         })
     }, [])
 
+    const deleteStation = useCallback((id) => {
+        StationService.deleteStation(id)
+        .then(({data}) => {
+            console.log(data)
+        })
+    }, [])
+
     return {
-        station: station, createStation
+        station: station, createStation, deleteStation
     }
 }
