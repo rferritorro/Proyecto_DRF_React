@@ -29,7 +29,7 @@ SECRET_KEY = data_env["SECRETDJANGO"]
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','127.0.0.1', '192.168.1.26']
+ALLOWED_HOSTS = ['localhost','127.0.0.1', '192.168.1.26', '192.168.1.21']
 
 
 # Application definition
@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'server.app.profile.ProfileAppConfig',
     'server.app.user.UserAppConfig',
     'server.app.station.StationAppConfig',
-    'server.app.slots.SlotAppConfig',
+    'server.app.slots.SlotsAppConfig',
+    'server.app.bike.BikeAppConfig',
+    'server.app.renting.RentingAppConfig',
     'corsheaders',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -83,6 +85,7 @@ WSGI_APPLICATION = 'server.wsgi.application'
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
     'http://192.168.1.26:3000',
+    'http://192.168.1.21:3000',
 ]
 
 # Database

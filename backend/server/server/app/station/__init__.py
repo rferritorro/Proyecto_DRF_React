@@ -5,4 +5,4 @@ class StationAppConfig(AppConfig):
     name = 'server.app.station'
     verbose_name = 'Station'
 
-default_app_config = 'server.app.user.StationAppConfig'
+default_app_config = 'server.app.station.StationAppConfig'

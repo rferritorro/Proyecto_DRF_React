@@ -9,9 +9,19 @@ class SlotSerializer(serializers.ModelSerializer):
             model = Slots
             fields = ('__all__')
     
-    def to_Station(instance):
+    def to_slots(instance):
         return {
             'id': instance.id,
             'station_id': instance.station_id,
-            'bikes': instance.bikes,
+            'bike_id': instance.bike_id,
         }
+
+    def AllSlots():
+        slots = Slots.objects.all()
+        serialized_bikes = []
+
+        for slot in slots.iterator():
+            new_bike = SlotSerializer.to_slots(slot)
+            serialized_bikes.append(new_bike)
+
+        return serialized_bikes

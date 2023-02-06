@@ -19,8 +19,10 @@ from django.conf.urls import include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('server/profile/', include('server.app.profile.urls')),
+    path('server/profile', include('server.app.profile.urls')),
     path('server/user', include('server.app.user.urls')),
     path('server/station', include('server.app.station.urls')),
     path('server/slots', include('server.app.slots.urls')),
+    path('server/bike', include('server.app.bike.urls')),
+    path('server/renting', include('server.app.renting.urls'))
 ]

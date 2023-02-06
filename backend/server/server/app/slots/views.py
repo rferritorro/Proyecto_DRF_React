@@ -1,14 +1,11 @@
 from rest_framework.response import Response
 from rest_framework import viewsets, status
-from .models import Slots
 from .serializers import SlotSerializer
 
 class SlotView(viewsets.GenericViewSet):
-    def GetSlots(self, request):
-        sql = 'SELECT * FROM slots'
-        qs = Slots.objects.raw(sql)
-        qs_json = SlotSerializer(qs, many=True).data
-        return Response(qs_json, content_type='application/json')
+    def AllSlots(self, request):
+        serializer = SlotSerializer.AllSlots()
+        return Response(serializer, status=status.HTTP_200_OK)
     # def CreateStation(self, request):
     #     serializer_data = request.data
     #     StationSerializer.CreateStation(data=serializer_data)

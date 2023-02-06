@@ -1,6 +1,7 @@
 from pyexpat import model
 from rest_framework import serializers
 from .models import User
+from ..profile.models import Profile
 import json
 from django.core.serializers import serialize
 
@@ -11,17 +12,17 @@ class UserSerializer(serializers.ModelSerializer):
 
     def to_user(data):
         return {
-            'id': data.id,
             'profile_id': data.profile_id,
             'username': data.username,
             'password': data.password
         }
     
-    def create(self):
+    def create(context):
+        profile = Profile.objects.get(id = context['profile_id'])
         user = User.objects.create(
-            profile_id = self.context['profile_id'],
-            username = self.context['username'],
-            password = self.context['password'],
+            username = context['username'],
+            password = context['password'],
+            profile = profile
         )
-
-        return 
+        serialized_user = UserSerializer.to_user(user)
+        return serialized_user
