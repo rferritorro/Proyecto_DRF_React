@@ -1,6 +1,6 @@
 from django.db import models
 from server.app.core.models import TimestampedModel
-from server.app.slots.models import Slots
+
 class Station(models.Model):
     class Meta:
         managed = False

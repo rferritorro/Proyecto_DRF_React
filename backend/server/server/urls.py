@@ -24,4 +24,5 @@ urlpatterns = [
     path('server/station', include('server.app.station.urls')),
     path('server/slots', include('server.app.slots.urls')),
     path('server/bike', include('server.app.bike.urls')),
+    path('server/renting', include('server.app.renting.urls'))
 ]

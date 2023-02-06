@@ -1,9 +1,7 @@
 from django.apps import AppConfig
 
-
-class SlotAppConfig(AppConfig):
+class SlotsAppConfig(AppConfig):
     name = 'server.app.slots'
-    label = 'slot'
-    verbose_name = 'Slot'
+    verbose_name = 'Slots'
 
-default_app_config = 'server.app.slots.SlotAppConfig'
+default_app_config = 'server.app.slots.SlotsAppConfig'

@@ -8,7 +8,7 @@ const HeaderComponent = () => {
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <Link to={"/"} className="navbar-brand">
-                    <img className="w-25 m-4" src="./logo_biosbike.png"/>
+                    <img className="w-25 m-4" src="/logo_biosbike.png"/>
             </Link>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
@@ -40,6 +40,11 @@ const HeaderComponent = () => {
                     <li className="nav-item m-3">
                         <Link to={"/about"} className="nav-link">
                             <strong className="h2 text-primary">About</strong>
+                        </Link>
+                    </li>
+                    <li className="nav-item m-3">
+                        <Link to={"/dashboard"} className="nav-link">
+                            <strong className="h2 text-primary">Admin</strong>
                         </Link>
                     </li>
                 </ul>

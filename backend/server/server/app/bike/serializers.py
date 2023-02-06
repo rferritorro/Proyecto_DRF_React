@@ -13,7 +13,6 @@ class BikeSerializer(serializers.ModelSerializer):
         return {
             "id": instance.id,
             "state":instance.state,
-            "slot":instance.slot_id
         }
     def AllBikes():
         bikes = Bike.objects.all()
