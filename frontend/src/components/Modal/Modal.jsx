@@ -3,6 +3,7 @@ import "./Modal.css"
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from "react-router-dom";
 import Modal from 'react-bootstrap/Modal';
+import {  toast } from 'react-toastify';
 import { useStation } from "../../hooks/useStation";
 
 const ModalComponent = (props) => {
@@ -10,6 +11,16 @@ const ModalComponent = (props) => {
     const navigate = useNavigate();
     const delStation = (data) => {
         deleteStation(data)
+        toast.warn('🚲 Deleted Station!', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+        })
         navigate('/dashboard')
     }
     if (!props.show) {

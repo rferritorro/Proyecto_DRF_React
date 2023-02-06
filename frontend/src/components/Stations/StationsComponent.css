@@ -1,3 +1,7 @@
+.stationComponentAdmin {
+    background-color: rgb(158, 192, 255);
+}
+
 .stationsDiv {
     display: flex;
     flex-direction: row;
@@ -8,7 +12,7 @@
     height: 400px;
     width: 400px;
     margin: 2%;
-    background-color: rgb(214, 253, 253);
+    background-color: rgb(188, 234, 255);
 }
 
 .stationDescr {

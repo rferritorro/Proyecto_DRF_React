@@ -5,16 +5,17 @@ import MapBox from "../../MapBox/MapBoxComponent"
 import { useStation } from "../../../hooks/useStation";
 import Button from 'react-bootstrap/Button';
 
+import {  toast } from 'react-toastify';
+
 const CreateStation = () => {
     const stations = useStation();
     const [add, setAdd] = useState();
     const [isAdmin] = useState(true);
     const [name, setName] = useState()
     const [url, setUrl] = useState()
-    const {createStation, deleteStation} = useStation();
-    
+    const {createStation} = useStation();
     const navigate = useNavigate();
-    console.log(add)
+    console.log(stations.station)
     const lat = (value) => {
         setAdd(value)
     }
@@ -26,14 +27,21 @@ const CreateStation = () => {
     }
     const submit = () => {
         createStation(data)
+        toast('🚲 New Station!', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+        })
         navigate('/dashboard')
     }
-    const delStation = (data) => {
-        deleteStation(data)
-        navigate('/dashboard')
-    }
+   
     return (
-        <div className="m-3">
+        <div className="m-3 stationComponent">
             <h1 className="text-center">ADD STATION</h1>
             <strong>NAME OF STATION: </strong>
             <input type={"text"} id="name" onChange={event => setName(event.target.value)}/><p></p>
@@ -44,19 +52,7 @@ const CreateStation = () => {
             <input type={"text"} value={add?.lat}/><p></p>
             <input type={"button"}  value={"Add"} onClick={submit}/>
             <MapBox data={stations?.station} lat={lat} admin={isAdmin}/>
-            <div className="stationsDiv">
-                {stations.station?.map((data, index)  => (
-                        <div className="stationsDivMap">
-                            <h2 className="stationDescr" key={index} >STATION: {data.id}</h2>
-                            <p className="stationDescr">{data.name}</p>
-                            <p className="stationDescr">Slots: {data.bikes}</p>
-                            <img className="w-75 m-4" src={data.img}/>
-                            <Button variant="danger m-4" onClick={() => delStation(data.id)}>
-                                Delete
-                            </Button> 
-                        </div>
-                ))}
-            </div>
+            
         </div>
     )
 }

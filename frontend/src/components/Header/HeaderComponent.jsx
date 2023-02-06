@@ -49,7 +49,7 @@ const HeaderComponent = () => {
                     </li>
                 </ul>
             </div>
-            <Link to={"/"} className="navbar-brand">
+            <Link to={"/login"} className="navbar-brand">
                 <FaUserCircle style={{fontSize: "90px"}}/>
             </Link>
         </nav>
