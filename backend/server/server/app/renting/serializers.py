@@ -18,10 +18,3 @@ class RentingSerializer(serializers.ModelSerializer):
             "bike_id":instance.bike,
             "date":instance.date,                                    
         }
-    def AllRenting():
-        renting = Renting.objects.all()
-        serialized_renting = []
-        for rent in renting.iterator():
-            new_renting = RentingSerializer.to_renting(rent)
-            serialized_renting.append(new_renting)
-        return serialized_renting

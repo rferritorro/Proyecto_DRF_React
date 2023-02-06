@@ -5,6 +5,6 @@ from .serializers import RentingSerializer
 
 class RentingView(viewsets.GenericViewSet):
     def AllRenting(self, request):
-        serializer = RentingSerializer.AllRenting()
-        print(serializer)
-        return Response(serializer,status=status.HTTP_200_OK)
+        renting = Renting.objects.all()
+        serializer = RentingSerializer(renting, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
