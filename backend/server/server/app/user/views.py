@@ -8,12 +8,11 @@ class UserView(viewsets.GenericViewSet):
 
     def create(self, request):
         serializer_context = {
-            'profile_id': request.data["profile_id"],
+            'avatar': request.data["avatar"],
             'username': request.data["username"],
             'password': request.data["password"]
         }
         serializer = UserSerializer.create(context=serializer_context)
-
         return Response(serializer, status=status.HTTP_200_OK)
 
     def login(self, request):
