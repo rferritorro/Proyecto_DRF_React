@@ -6,7 +6,7 @@ from .serializers import StationSerializer
 
 class StationView(viewsets.GenericViewSet):
     def GetStation(self, request):
-        sql = 'SELECT station.*, COUNT(bike.id) FROM station LEFT JOIN slots ON slots.station_id = station.id LEFT JOIN bike ON slots.id = bike.slot_id GROUP BY station.id'
+        sql = 'SELECT station.*, COUNT(bike.id) FROM station LEFT JOIN slots ON slots.station_id = station.id LEFT JOIN bike ON slots.id = bike.slot_id GROUP BY station.id ORDER BY station.id'
         qs = Station.objects.raw(sql)
         qs_json = StationSerializer(qs, many=True).data
         return Response(qs_json, content_type='application/json')
