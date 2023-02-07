@@ -14,3 +14,12 @@ class UserView(viewsets.GenericViewSet):
         }
         serializer = UserSerializer.create(context=serializer_context)
         return Response(serializer, status=status.HTTP_200_OK)
+
+    def login(self, request):
+        serializer_login = {
+            'username': request.data["username"],
+            'password': request.data["password"]
+        }
+        serializer = UserSerializer.loginSerializer(context=serializer_login)
+
+        return Response(serializer, status=status.HTTP_200_OK)

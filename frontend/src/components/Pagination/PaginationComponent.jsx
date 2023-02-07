@@ -10,16 +10,6 @@ const PaginationComponent = (props) => {
     console.log(props)
     return (
         <div>
-            {/* <div className="stationsDiv">
-                {props.stations.filter(() => props.stations.length / 2).map((data, index)  => (
-                        <div className="stationsDivMap">
-                            <h2 className="stationDescr" key={index} >STATION: {data.id}</h2>
-                            <p className="stationDescr">{data.name}</p>
-                            <p className="stationDescr">Slots: {data.bikes}</p>
-                            <img className="w-75 m-4" src={data.img}/>
-                        </div>
-                ))}  
-            </div> */}
             <div className="PaginationContainer">
                 <ul className="paginationNumbers text-center">
                     <BsFillArrowLeftCircleFill className="btn btn-xs mt-2" onClick={() => props.paginates(NumbersPages[0])} style={{fontSize: "50px"}}/>   

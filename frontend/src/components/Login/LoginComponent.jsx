@@ -4,7 +4,7 @@ import {AiOutlineUserAdd} from 'react-icons/ai'
 import {RiLockPasswordFill} from 'react-icons/ri'
 import {Link} from 'react-router-dom'
 
-const LoginComponent = () => {
+const LoginComponent = (props) => {
     const [valueUsername, setUsername] = useState()
     const [valuePassword, setPassword] = useState()
     const [errorUsername, setErrorUsername] = useState()
@@ -13,7 +13,7 @@ const LoginComponent = () => {
         "username": valueUsername,
         "password": valuePassword
     }
-    console.log(formLogin)
+    console.log(props)
     const submitLogin = () => {
         if (!valueUsername) {
             setErrorUsername("*Username can't be blank. Please insert an username")
@@ -24,6 +24,9 @@ const LoginComponent = () => {
         
         if (valueUsername.length >= 5 && valuePassword.length >= 6) {
             console.log("NO HAY ERRORRES")
+            setErrorPassword("")
+            setErrorUsername("")
+            props.formData(formLogin)
         }else {
             console.log("ERRORES")
         }
