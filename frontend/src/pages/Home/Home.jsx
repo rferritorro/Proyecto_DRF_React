@@ -14,7 +14,7 @@ const imgs = [
 const HomePage = () =>{
     return (
         <div>
-            <Carousel showArrows={true} autoPlay={true}>
+            <Carousel showArrows={true} autoPlay={true} showThumbs={false}>
                 {imgs.map((URL, index) => (
                     <div className="img1" key={index} style={{backgroundImage: 'url("'+URL+'")'}}/> 
                 ))}

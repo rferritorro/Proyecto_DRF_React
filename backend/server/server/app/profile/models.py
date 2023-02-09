@@ -7,6 +7,7 @@ class Profile(models.Model):
         db_table = "profile"
     
     avatar = models.CharField(max_length=300)
+    email = models.CharField(max_length=300)
 
     def __str__(self):
         return str(self.id)

@@ -5,6 +5,7 @@ import Footer from './pages/Footer'
 import Home from './pages/Home/Home'
 import Stations from './pages/Stations'
 import Login from './pages/Login/Login'
+import Profile from './pages/Profile/Profile'
 import Register from './pages/Login/Register'
 import Dashboard from './pages/Dashboard/Dashboard'
 import CreateStation from './components/Dashboard/stations/CreateStation';
@@ -23,6 +24,7 @@ function App() {
           <Route path='/stations' element={<Stations/>} />
           <Route path='/about' element={<About/>} />
           <Route path='/dashboard' element={<Dashboard/>} />
+          <Route path='/profile' element={<Profile/>} />
           <Route path='/dashboard/add_station' element={<CreateStation/>} />
           <Route path='/login' element={<Login/>} />
           <Route path='/register' element={<Register/>} />

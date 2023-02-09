@@ -1,7 +1,7 @@
 import React, {Suspense} from "react";
 const StationsAdmin = React.lazy(() => {
     return new Promise(resolve => {
-        setTimeout(() => resolve(import("../../components/Dashboard/stations/StationComponentAdmin")), 2000)
+        setTimeout(() => resolve(import("../../components/Dashboard/stations/StationComponentAdmin")), 1500)
     })
 })
 const StationsPageAdmin = () =>{

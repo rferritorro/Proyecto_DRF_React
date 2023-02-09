@@ -9,6 +9,7 @@ class UserView(viewsets.GenericViewSet):
     def create(self, request):
         serializer_context = {
             'avatar': request.data["avatar"],
+            'email': request.data["email"],
             'username': request.data["username"],
             'password': request.data["password"]
         }

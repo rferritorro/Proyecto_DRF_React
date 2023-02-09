@@ -4,6 +4,7 @@ from rest_framework.exceptions import NotFound
 from .models import User
 from ..profile.models import Profile
 import json
+from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.core.serializers import serialize
 from django.contrib.auth.hashers import check_password
@@ -14,13 +15,14 @@ from django.contrib.auth.hashers import make_password
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id, username, profile_id, password')
+        fields = ('id, username, profile_id, password, email')
 
     def to_user(data):
         return {
             'profile_id': data.profile_id,
             'username': data.username,
-            'password': data.password
+            'password': data.password,
+            'token': data.token
         }
     
     def create(context):   
@@ -31,7 +33,8 @@ class UserSerializer(serializers.ModelSerializer):
         else:
             # email create here
             new_profile = Profile.objects.create(
-                avatar = context['avatar']
+                avatar = context['avatar'],
+                email = context['email']
             )
             ProfileSerializer.to_profile(new_profile)
             profile = Profile.objects.get(id = new_profile.id)
@@ -47,13 +50,15 @@ class UserSerializer(serializers.ModelSerializer):
         password = context['password']
         user = get_object_or_404(User, username=context['username'])
         
-        if not check_password(context['password'], user.password):
-            return "Username or Password there aren't correct"
+        if not check_password(password, user.password):
+            raise Http404
 
-        return {
-            'user' : {
-                'username': user.username,
-                'password': user.password,
-            },
-            'token': user.token
-        }
+        serialized_user = UserSerializer.to_user(user)
+        return serialized_user
+        # return {
+        #     'user' : {
+        #         'username': user.username,
+        #         'password': user.password,
+        #     },
+        #     'token': user.token
+        # }

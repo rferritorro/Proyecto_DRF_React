@@ -7,12 +7,13 @@ from django.core.serializers import serialize
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ('id','avatar')
+        fields = ('id','avatar', 'email')
 
     def to_profile(data):
         return {
             'id': data.id,
             'avatar': data.avatar,
+            'email': data.email
         }
     
     def getProfile(context):
