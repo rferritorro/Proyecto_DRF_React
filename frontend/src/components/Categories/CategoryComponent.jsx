@@ -6,10 +6,13 @@ import { Link } from 'react-router-dom'
 import ReactCardFlip from 'react-card-flip';
 import { Doughnut } from "react-chartjs-2";
 import { useBike } from "../../hooks/useBike";
+import { useSlot } from "../../hooks/useSlot";
 import 'chart.js/auto'
 
 const CategoryComponent = () => {
     const bikes = useBike()
+
+    const slots = useSlot()
     const [isFlippedBike, setIsFlippedBike] = useState(false);
     const [isFlippedSlot, setIsFlippedSlot] = useState(false);
 
@@ -34,9 +37,20 @@ const CategoryComponent = () => {
             }
         }
        return [ocuped_bike,fault_bike,available_bike]
-}
+    }
+    const Array_Slots = (slots) => {
+        let slots_available = 0
+        let slots_unavailable = 0
+        if (slots && slots.slots) {
+            var array_slots = new Array(slots.slots)
+            for (let i=0;i<array_slots[0].length;i++) {
+                array_slots[0][i].state ? slots_available++ : slots_unavailable++
+            }
+        }
+       return [slots_available,slots_unavailable]
+    }
     
-    const data = {
+    const data_bike = {
         labels: ['Unavailable', 'Faulted', 'Available'],
         datasets: [
           {
@@ -58,6 +72,26 @@ const CategoryComponent = () => {
           ],
         };
 
+    const data_slots = {
+            labels: ['Unavailable', 'Available'],
+            datasets: [
+              {
+                label: '',
+                data: Array_Slots(slots),
+                backgroundColor: [
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+    
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                  ],
+                  borderWidth: 1,
+                },
+              ],
+            };
+    
 
 
 
@@ -73,7 +107,7 @@ const CategoryComponent = () => {
         <div className="category">
             <div className="categorys">
             <div>
-                <Link to={"/stations"} className="header_decoration">
+                <Link to={"/stations"} className="header_decoration text-dark">
                     <GiChemicalTank style={{ fontSize: "180px" }} />
                 </Link>
             </div>
@@ -84,7 +118,7 @@ const CategoryComponent = () => {
                         <FaChargingStation style={{ fontSize: "180px" }} />
                     </div>
                     <div onClick={handleClickSlot}>
-                        <Doughnut data={data} />
+                        <Doughnut data={data_bike} />
                     </div>
                 </ReactCardFlip>
             </div>
@@ -94,7 +128,7 @@ const CategoryComponent = () => {
                         <GiDutchBike style={{ fontSize: "180px" }} />
                     </div>
                     <div onClick={handleClickBike} className="header_decoration">
-                        <Doughnut data={data} />
+                        <Doughnut data={data_slots} />
                     </div>
                 </ReactCardFlip>
             </div>
