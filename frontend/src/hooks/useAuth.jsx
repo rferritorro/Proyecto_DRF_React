@@ -1,18 +1,101 @@
-import { useEffect, useCallback, useState } from "react";
+import { useEffect, useCallback, useState, useContext } from "react";
 import AuthService from "../services/AuthService";
-
+import JWTService from "../services/JWTService"
+import { useNavigate } from "react-router-dom";
+import UserContext from "../context/UserContext";
+import {  toast } from 'react-toastify';
 export function useAuth() {
-    const [user, setUser] = useState();
-
+    const navigate = useNavigate()
+    const { users, setUser, jwt, setJWT } = useContext(UserContext);
     const login = useCallback((data) => {
+        AuthService.loginUser(data)
+        .then(({data}) => {
+            setUser(data)
+            JWTService.JWTPutToken(data.token)
+            toast.success('LOGIN', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                theme: "dark",
+            })
+            navigate("/")
+        }).catch((error) => {
+            console.log(error)
+            toast.error('Username or password not correct!', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                theme: "dark",
+            })
+        })
+    }, [setJWT])
+
+    const register = useCallback((data) => {
         console.log(data)
-        // AuthService.loginUser(data)
-        // .then(({data}) => {
-        //     console.log(data)
-        // })
+        AuthService.registerUser(data)
+        .then(({data}) => {
+            //setUser(data)
+            JWTService.JWTPutToken(data.token)
+            toast.success('REGISTER', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                theme: "dark",
+            })
+            navigate("/")
+        }).catch(() => {
+            toast.error('Username or email are exist correct!', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                theme: "dark",
+            })
+        })
+    }, [setJWT])
+
+    const userlogout = useCallback(() => {
+        toast.info('LogOut!', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            theme: "dark",
+        })
+        JWTService.JWTRemoveToken()
     }, [])
 
+    // const getProfile = useCallback((id) => {
+    //     AuthService.getProfile(id)
+    //     .then(({data}) => {
+    //         console.log(data)
+    //     }).catch((error) => {
+    //         console.log(error)
+    //     })
+    // }, [])
+    const userLoged = () => {
+        console.log(users)
+        if (users) {
+            return true
+        }else {
+            return false
+        }
+    }
+
     return {
-        user: user, login
+         login, userLoged, userlogout, user: users, register
     }
 }

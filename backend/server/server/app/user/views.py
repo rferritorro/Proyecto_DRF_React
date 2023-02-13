@@ -11,6 +11,7 @@ class UserView(viewsets.GenericViewSet):
     def create(self, request):
         serializer_context = {
             'avatar': request.data["avatar"],
+            'email': request.data["email"],
             'username': request.data["username"],
             'password': request.data["password"]
         }
@@ -31,5 +32,14 @@ class UserView(viewsets.GenericViewSet):
             'password': request.data["password"]
         }
         serializer = UserSerializer.loginSerializer(context=serializer_login)
+
+        return Response(serializer, status=status.HTTP_200_OK)
+
+    def isAdmin(self, request, *args, **kwargs):
+        serializer_context = {
+            'id': kwargs["id"]
+        }
+
+        serializer = UserSerializer.getAdmin(context=serializer_context)
 
         return Response(serializer, status=status.HTTP_200_OK)

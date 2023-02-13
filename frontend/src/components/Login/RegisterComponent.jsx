@@ -5,7 +5,7 @@ import {RiLockPasswordFill} from 'react-icons/ri'
 import {RxAvatar} from 'react-icons/rx'
 import {Link} from 'react-router-dom'
 
-const RegisterComponent = () => {
+const RegisterComponent = (props) => {
     const [valueUsername, setUsername] = useState()
     const [valueEmail, setEmail] = useState()
     const [valueAvatar, setAvatar] = useState()
@@ -45,6 +45,12 @@ const RegisterComponent = () => {
 
         if (valueUsername.length >= 5 && valuePassword.length >= 6 && /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(valueEmail) && valuePassword == valuePassword2) {
             console.log("NO HAY ERRORRES")
+            setErrorPassword("")
+            setErrorPassword2("")
+            setErrorUsername("")
+            setErrorEmail("")
+            setErrorAvatar("")
+            props.formData(formRegister) 
         }else {
             console.log("ERRORES")
         }

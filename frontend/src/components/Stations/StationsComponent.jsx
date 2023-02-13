@@ -3,7 +3,7 @@ import './StationsComponent.css'
 import { useStation } from "../../hooks/useStation";
 const MapBox = React.lazy(() => {
     return new Promise(resolve => {
-        setTimeout(() => resolve(import("../MapBox/MapBoxComponent")), 2000)
+        setTimeout(() => resolve(import("../MapBox/MapBoxComponent")), 1500)
     })
 })
 
