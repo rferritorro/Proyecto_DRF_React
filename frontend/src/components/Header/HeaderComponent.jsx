@@ -5,7 +5,6 @@ import {FaUserCircle} from 'react-icons/fa'
 import {MdOutlineLogout} from 'react-icons/md'
 
 const HeaderComponent = (props) => {
-    console.log(props)
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <Link to={"/"} className="navbar-brand">

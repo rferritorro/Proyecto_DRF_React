@@ -1,11 +1,17 @@
-import React from "react";
-
-const ProfileComponent = () => {
-
-
+import React, { useEffect, useState } from "react";
+import "./ProfileComponent.css"
+const ProfileComponent = (props) => {
     return (
         <div>
-            <h1>PROFILE</h1>
+            <div className="w-25 m-5 border">
+                <div className="bg-primary p-3 text-center">
+                    <h4>{props.userData.email}</h4>
+                </div>
+                <hr></hr>
+                <div>
+                    <img className="w-25 m-3" src={props.userData.avatar} />
+                </div>
+            </div>
         </div>
     )
 }

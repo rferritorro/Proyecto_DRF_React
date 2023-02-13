@@ -1,5 +1,6 @@
-import React, {Suspense, useState} from "react";
+import React, {Suspense, useState, useContext} from "react";
 import {useAuth} from "../../hooks/useAuth"
+import UserContext from "../../context/UserContext"
 
 const ProfileComponent = React.lazy(() => {
     return new Promise(resolve => {
@@ -8,11 +9,11 @@ const ProfileComponent = React.lazy(() => {
 })
 
 const ProfilePage = () => {
- 
-   
+    const {users, setUser} = useContext(UserContext);
+    console.log(users)
     return (
         <Suspense fallback={<div className="text-center"><img className="w-25" src="./lazy-loading.gif"/></div>}>
-            <ProfileComponent />
+            <ProfileComponent userData={users}/>
         </Suspense>
     )
 }

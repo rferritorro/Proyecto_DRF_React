@@ -2,41 +2,39 @@ import React, { useEffect, useState } from "react";
 import { JWTGetToken, JWTRemoveToken } from "../services/JWTService";
 import AuthService from "../services/AuthService"
 import { useNavigate } from "react-router-dom"
-const Context = React.createContext({});
-
-export function UserContext({ children }){
+const Context = React.createContext({})
+export function UserContextProvider({ children }) {
+    //const [jwt, setJWT] = useState(() => checkUser());
     const navigate = useNavigate()
-    const checkUser = async()=>{
-        if(JWTGetToken){
-            console.log("USERCONTEXT1")
-            const res = await AuthService.loginUser()
-            const response = await res.json()
-            if(response.token && response.user){
-                console.log("USERCONTEXT1.1")
-                setJWT(response.token)
-                setUser(response.user)
-            }else{
-                console.log("USERCONTEXT1.2")
-                JWTRemoveToken()
-                if(window.location.pathname != '/'){
-                    navigate('/')
-                }
+    useEffect(() => {
+        isAdmin()
+    }, [])
+    const checkUser = async () => {
+        if (JWTGetToken) {
+            const res = await AuthService.getProfile(6)
+            if (res) {
+                setUser(res.data[0])
             }
-
-        }else{
-            console.log("USERCONTEXT2")
+        } else {
             JWTRemoveToken()
-            if(window.location.pathname != '/'){
-                navigate('/')
-                console.log("USERCONTEXT2.2")
-            }
+            navigate('/')
         }
     }
-
-    const [jwt, setJWT] = useState(() => checkUser());
-    const [user, setUser] =useState(null)
+    const isAdmin = async () => {
+        if (JWTGetToken) {
+            const res = await AuthService.isAdmin(10)
+            if (res) {
+                console.log(res)
+            }
+        }else {
+            JWTRemoveToken()
+            navigate('/')
+        }
+    }
+    const [users, setUser] = useState(null)
+    const [jwt, setJWT] = useState(() => checkUser())
     return (
-        <Context.Provider value={{ jwt, setJWT,user,setUser }}>{ children }</Context.Provider>
+        <Context.Provider value={{ jwt, setJWT, users, setUser }}>{children}</Context.Provider>
     );
 }
 export default Context

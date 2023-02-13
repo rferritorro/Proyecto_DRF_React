@@ -15,14 +15,15 @@ from django.contrib.auth.hashers import make_password
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id, username, profile_id, password, email')
+        fields = ('id, username, profile_id, password, email, admin')
 
     def to_user(data):
         return {
             'profile_id': data.profile_id,
             'username': data.username,
             'password': data.password,
-            'token': data.token
+            'token': data.token,
+            'isAdmin': data.admin
         }
     
     def create(context):   
@@ -55,10 +56,13 @@ class UserSerializer(serializers.ModelSerializer):
 
         serialized_user = UserSerializer.to_user(user)
         return serialized_user
-        # return {
-        #     'user' : {
-        #         'username': user.username,
-        #         'password': user.password,
-        #     },
-        #     'token': user.token
-        # }
+
+    def getAdmin(context):
+        adminId = User.objects.get(profile_id=context['id'])
+        #print(adminId)
+        # if not adminId:
+        #     raise serializers.ValidationError('UserAdmin is not foud')
+        serialized_user = UserSerializer.to_user(adminId)
+        # if serialized_user.isAdmin != "true":
+        #     raise serializers.ValidationError('UserAdmin is not foud')
+        return serialized_user

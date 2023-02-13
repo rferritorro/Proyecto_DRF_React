@@ -24,3 +24,12 @@ class UserView(viewsets.GenericViewSet):
         serializer = UserSerializer.loginSerializer(context=serializer_login)
 
         return Response(serializer, status=status.HTTP_200_OK)
+
+    def isAdmin(self, request, *args, **kwargs):
+        serializer_context = {
+            'id': kwargs["id"]
+        }
+
+        serializer = UserSerializer.getAdmin(context=serializer_context)
+
+        return Response(serializer, status=status.HTTP_200_OK)

@@ -5,12 +5,12 @@ import { useNavigate } from "react-router-dom";
 import UserContext from "../context/UserContext";
 import {  toast } from 'react-toastify';
 export function useAuth() {
-    const {user, setUser} = useContext(UserContext);
-    const { jwt, setJWT } = useContext(UserContext);
     const navigate = useNavigate()
+    const { users, setUser, jwt, setJWT } = useContext(UserContext);
     const login = useCallback((data) => {
         AuthService.loginUser(data)
         .then(({data}) => {
+            setUser(data)
             JWTService.JWTPutToken(data.token)
             toast.success('LOGIN', {
                 position: "top-right",
@@ -22,7 +22,8 @@ export function useAuth() {
                 theme: "dark",
             })
             navigate("/")
-        }).catch(() => {
+        }).catch((error) => {
+            console.log(error)
             toast.error('Username or password not correct!', {
                 position: "top-right",
                 autoClose: 5000,
@@ -33,7 +34,7 @@ export function useAuth() {
                 theme: "dark",
             })
         })
-    }, [])
+    }, [setJWT])
 
     const register = useCallback((data) => {
         console.log(data)
@@ -62,7 +63,7 @@ export function useAuth() {
                 theme: "dark",
             })
         })
-    }, [])
+    }, [setJWT])
 
     const userlogout = useCallback(() => {
         toast.info('LogOut!', {
@@ -77,9 +78,17 @@ export function useAuth() {
         JWTService.JWTRemoveToken()
     }, [])
 
+    // const getProfile = useCallback((id) => {
+    //     AuthService.getProfile(id)
+    //     .then(({data}) => {
+    //         console.log(data)
+    //     }).catch((error) => {
+    //         console.log(error)
+    //     })
+    // }, [])
     const userLoged = () => {
-        console.log(user)
-        if (user) {
+        console.log(users)
+        if (users) {
             return true
         }else {
             return false
@@ -87,6 +96,6 @@ export function useAuth() {
     }
 
     return {
-         login, userLoged, userlogout, user: user, register
+         login, userLoged, userlogout, user: users, register
     }
 }
