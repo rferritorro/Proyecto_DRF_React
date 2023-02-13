@@ -5,4 +5,5 @@ urlpatterns = [
     path('add', UserView.as_view({'post': 'create'})),
     path('login', UserView.as_view({'post': 'login'})),
     path('admin/<int:id>', UserView.as_view({'get': 'isAdmin'})),
+    path('/<int:id>', UserView.as_view({'get': 'getUser'})),
 ]

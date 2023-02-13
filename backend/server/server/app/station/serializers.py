@@ -10,7 +10,7 @@ class StationSerializer(serializers.ModelSerializer):
             fields = ('__all__')
             #fields = ('id', 'name', 'lat', 'long')
     
-    def to_Station(instance):
+    def to_station(instance):
         return {
             'id': instance.id,
             'name': instance.name,
@@ -18,11 +18,11 @@ class StationSerializer(serializers.ModelSerializer):
             'long': instance.long,
             'img': instance.img
         }
-    def CreateStation(data):
+    def CreateStation(context):
         station = Station.objects.create(
-            name = data["name"],
-            long = data["long"],
-            lat = data["lat"],
-            img = data["img"]
+            name = context["name"],
+            long = context["long"],
+            lat = context["lat"],
+            img = context["img"]
         )
         return station

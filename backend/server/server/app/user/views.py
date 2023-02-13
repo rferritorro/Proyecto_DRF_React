@@ -3,6 +3,8 @@
 from rest_framework.response import Response
 from rest_framework import status, viewsets
 from .serializers import UserSerializer
+from ..profile.serializers import ProfileSerializer
+
 
 class UserView(viewsets.GenericViewSet):
 
@@ -15,6 +17,14 @@ class UserView(viewsets.GenericViewSet):
         }
         serializer = UserSerializer.create(context=serializer_context)
         return Response(serializer, status=status.HTTP_200_OK)
+
+    def getUser(self, request, *args , **kwargs):
+
+        serializer_user = UserSerializer.getUser(context={'id': kwargs["id"]})
+        serializer_profile = ProfileSerializer.getProfile(context={'id': serializer_user["profile_id"]})
+        serializer_user["profile_id"] = serializer_profile
+
+        return Response(serializer_user, status=status.HTTP_200_OK)
 
     def login(self, request):
         serializer_login = {
