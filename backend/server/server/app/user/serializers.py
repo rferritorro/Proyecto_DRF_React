@@ -47,12 +47,8 @@ class UserSerializer(serializers.ModelSerializer):
             serialized_user = UserSerializer.to_user(user)
             return serialized_user
 
-    def getUser(context):
-        user = User.objects.get(id = context["id"])
-        serialized_user = UserSerializer.to_user(user)
-        return serialized_user
-
     def loginSerializer(context):
+        password = context['password']
         user = get_object_or_404(User, username=context['username'])
         
         if not check_password(password, user.password):
@@ -67,6 +63,6 @@ class UserSerializer(serializers.ModelSerializer):
         # if not adminId:
         #     raise serializers.ValidationError('UserAdmin is not foud')
         serialized_user = UserSerializer.to_user(adminId)
-        # if serialized_user.isAdmin != "true":
-        #     raise serializers.ValidationError('UserAdmin is not foud')
+        if serialized_user["isAdmin"] == 'false':
+            raise serializers.ValidationError('UserAdmin is not foud')
         return serialized_user
