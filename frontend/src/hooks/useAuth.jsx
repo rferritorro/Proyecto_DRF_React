@@ -6,11 +6,16 @@ import UserContext from "../context/UserContext";
 import {  toast } from 'react-toastify';
 export function useAuth() {
     const navigate = useNavigate()
-    const { users, setUser, jwt, setJWT } = useContext(UserContext);
+    const { users, setUser, jwt, setJWT, setIsAdmin, checkUser } = useContext(UserContext);
     const login = useCallback((data) => {
         AuthService.loginUser(data)
         .then(({data}) => {
+            AuthService.isAdmin(data.id)
+            .then(() => {
+                setIsAdmin(true)
+            })
             setUser(data)
+            localStorage.setItem('id', data.id)
             JWTService.JWTPutToken(data.token)
             toast.success('LOGIN', {
                 position: "top-right",
@@ -79,17 +84,30 @@ export function useAuth() {
         })
         navigate("/")
         setUser(null)
+        setIsAdmin(false)
+        localStorage.removeItem('id')
         JWTService.JWTRemoveToken()
     }, [])
 
-    // const getProfile = useCallback((id) => {
-    //     AuthService.getProfile(id)
-    //     .then(({data}) => {
-    //         console.log(data)
-    //     }).catch((error) => {
-    //         console.log(error)
-    //     })
-    // }, [])
+    const updateProfile = useCallback((data, id) => {
+        AuthService.updateUser(data, id)
+        .then(({data}) => {
+            checkUser()
+            toast.success('YOUR PROFILE IS UPDATED', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                theme: "dark",
+            })
+            console.log(data)
+        }).catch(() => {
+            console.log("error")
+        })
+    }, [setJWT])
+
     const userLoged = () => {
         console.log(users)
         if (users) {
@@ -100,6 +118,6 @@ export function useAuth() {
     }
 
     return {
-         login, userLoged, userlogout, user: users, register
+         login, userLoged, userlogout, user: users, register, updateProfile
     }
 }

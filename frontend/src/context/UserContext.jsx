@@ -15,9 +15,9 @@ export function UserContextProvider({ children }) {
     }, [])
     const checkUser = async () => {
         if (JWTGetToken()) {
-            const res = await AuthService.getProfile(users?.profile_id)
+            const res = await AuthService.getProfile(localStorage.getItem('id'))
             if (res) {
-                setUser(res.data[0])
+                setUser(res.data)
             }
         } else {
             setUser(null)
@@ -26,18 +26,20 @@ export function UserContextProvider({ children }) {
     }
     const isAdmin = async () => {
         if (JWTGetToken()) {
-            const res = await AuthService.isAdmin(users?.profile_id)
+            const res = await AuthService.isAdmin(localStorage.getItem('id'))
             if (res) {
+                console.log(res)
                 setIsAdmin(true)
             }
         }else {
             JWTRemoveToken()
             setUser(null)
+            setIsAdmin(false)
         }
     }
     const [jwt, setJWT] = useState(() => checkUser())
     return (
-        <Context.Provider value={{ jwt, setJWT, users, setUser, Admin, setIsAdmin }}>{children}</Context.Provider>
+        <Context.Provider value={{ jwt, setJWT, users, setUser, Admin, setIsAdmin, checkUser, isAdmin }}>{children}</Context.Provider>
     );
 }
 export default Context

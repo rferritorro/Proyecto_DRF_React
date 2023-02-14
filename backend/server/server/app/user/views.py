@@ -16,6 +16,8 @@ class UserView(viewsets.GenericViewSet):
             'password': request.data["password"]
         }
         serializer = UserSerializer.create(context=serializer_context)
+        serializer_profile = ProfileSerializer.getProfile(context={'id': serializer["profile_id"]})
+        serializer["profile_id"] = serializer_profile
         return Response(serializer, status=status.HTTP_200_OK)
 
     def getUser(self, request, *args , **kwargs):
@@ -26,12 +28,19 @@ class UserView(viewsets.GenericViewSet):
 
         return Response(serializer_user, status=status.HTTP_200_OK)
 
+    def putUser(self, request, *args , **kwargs):
+        serializer_user = UserSerializer.putUser(data=request.data, context=kwargs["id"])
+
+        return Response(serializer_user, status=status.HTTP_200_OK) 
+
     def login(self, request):
         serializer_login = {
             'username': request.data["username"],
             'password': request.data["password"]
         }
         serializer = UserSerializer.loginSerializer(context=serializer_login)
+        serializer_profile = ProfileSerializer.getProfile(context={'id': serializer["profile_id"]})
+        serializer["profile_id"] = serializer_profile
 
         return Response(serializer, status=status.HTTP_200_OK)
 

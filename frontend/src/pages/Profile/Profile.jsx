@@ -10,10 +10,20 @@ const ProfileComponent = React.lazy(() => {
 
 const ProfilePage = () => {
     const {users} = useContext(UserContext);
+    const {updateProfile} = useAuth();
     console.log(users)
+    const [settings, setSetting] = useState(false)
+    const isSettings = ()=> {
+        console.log("SETTINGS")
+        setSetting(true)
+    }
+    const submit = (form, id)=> {
+        updateProfile(form, id)
+        setSetting(false)
+    }
     return (
         <Suspense fallback={<div className="text-center"><img className="w-25" src="./lazy-loading.gif"/></div>}>
-            <ProfileComponent userData={users}/>
+            <ProfileComponent userData={users} isSettings={isSettings} update={settings} submit={submit}/>
         </Suspense>
     )
 }
