@@ -14,6 +14,7 @@ class SlotSerializer(serializers.ModelSerializer):
             'id': instance.id,
             'station_id': instance.station_id,
             'bike_id': instance.bike_id,
+            'state': instance.state
         }
 
     def AllSlots():
