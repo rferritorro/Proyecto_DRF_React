@@ -24,6 +24,7 @@ export function useAuth() {
             navigate("/")
         }).catch((error) => {
             console.log(error)
+            setUser(null)
             toast.error('Username or password not correct!', {
                 position: "top-right",
                 autoClose: 5000,
@@ -40,7 +41,7 @@ export function useAuth() {
         console.log(data)
         AuthService.registerUser(data)
         .then(({data}) => {
-            //setUser(data)
+            setUser(data)
             JWTService.JWTPutToken(data.token)
             toast.success('REGISTER', {
                 position: "top-right",
@@ -53,6 +54,7 @@ export function useAuth() {
             })
             navigate("/")
         }).catch(() => {
+            setUser(null)
             toast.error('Username or email are exist correct!', {
                 position: "top-right",
                 autoClose: 5000,
@@ -75,6 +77,8 @@ export function useAuth() {
             draggable: true,
             theme: "dark",
         })
+        navigate("/")
+        setUser(null)
         JWTService.JWTRemoveToken()
     }, [])
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./ProfileComponent.css"
 const ProfileComponent = (props) => {
+    console.log(props.userData)
     return (
         <div>
             <div className="w-25 m-5 border">

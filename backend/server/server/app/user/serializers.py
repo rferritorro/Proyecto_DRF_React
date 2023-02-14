@@ -63,6 +63,6 @@ class UserSerializer(serializers.ModelSerializer):
         # if not adminId:
         #     raise serializers.ValidationError('UserAdmin is not foud')
         serialized_user = UserSerializer.to_user(adminId)
-        if serialized_user["isAdmin"] == 'false':
+        if not serialized_user["isAdmin"]:
             raise serializers.ValidationError('UserAdmin is not foud')
         return serialized_user
