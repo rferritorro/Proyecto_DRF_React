@@ -47,6 +47,11 @@ class UserSerializer(serializers.ModelSerializer):
             serialized_user = UserSerializer.to_user(user)
             return serialized_user
 
+    def getUser(context):
+        user = User.objects.get(id = context["id"])
+        serialized_user = UserSerializer.to_user(user)
+        return serialized_user
+        
     def loginSerializer(context):
         password = context['password']
         user = get_object_or_404(User, username=context['username'])
