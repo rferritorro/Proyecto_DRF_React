@@ -12,11 +12,11 @@ class StationView(viewsets.GenericViewSet):
 
     def CreateStation(self, request):
         serializer_data = request.data
-        StationSerializer.CreateStation(data=serializer_data)
+        StationSerializer.CreateStation(context=serializer_data)
         return Response({"ADDED NEW STATION SUCCESFULL"}, status=status.HTTP_201_CREATED)
     def UpdateStation(self, request):
         serializer_data = request.data
-        StationSerializer.UpdateStation(data=serializer_data)
+        StationSerializer.UpdateStation(context=serializer_data)
         # serializer = self.serializer_class(
         #     data = serializer_data
         # )

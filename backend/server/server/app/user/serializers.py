@@ -19,6 +19,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     def to_user(data):
         return {
+            'id': data.id,
             'profile_id': data.profile_id,
             'username': data.username,
             'password': data.password,
@@ -51,6 +52,11 @@ class UserSerializer(serializers.ModelSerializer):
         user = User.objects.get(id = context["id"])
         serialized_user = UserSerializer.to_user(user)
         return serialized_user
+    
+    def putUser(data, context):
+        User.objects.bulk_update([User(id=context, username=data["username"], password=make_password(data["password"]))],fields=["username", "password"])
+        Profile.objects.bulk_update([Profile(id=data["profile_id"], email=data["email"], avatar=data["avatar"])],fields=["email", "avatar"])
+        return "Correct"
         
     def loginSerializer(context):
         password = context['password']
@@ -63,10 +69,7 @@ class UserSerializer(serializers.ModelSerializer):
         return serialized_user
 
     def getAdmin(context):
-        adminId = User.objects.get(profile_id=context['id'])
-        #print(adminId)
-        # if not adminId:
-        #     raise serializers.ValidationError('UserAdmin is not foud')
+        adminId = User.objects.get(id=context['id'])
         serialized_user = UserSerializer.to_user(adminId)
         if not serialized_user["isAdmin"]:
             raise serializers.ValidationError('UserAdmin is not foud')

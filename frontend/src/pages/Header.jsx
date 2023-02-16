@@ -7,9 +7,8 @@ import { JWTGetToken, JWTRemoveToken } from "../services/JWTService";
 const HeaderPage = () =>{
     const [token_logout, setLog] = useState();
     const token = JWTGetToken()
-    //const {users, Admin} = useContext(UserContext);
     const { users, Admin } = useContext(UserContext);
-    console.log(users)
+    console.log(Admin)
     const {userlogout} = useAuth();
     const navigate = useNavigate();
     const isLogin = () => {
@@ -21,7 +20,7 @@ const HeaderPage = () =>{
         userlogout()
     }
     return (
-        <Header isToken={token} isLogout={isLogout} token_logout={token_logout} isLogin={isLogin} isAdmin={Admin}/>
+        <Header isToken={token} isLogout={isLogout} token_logout={token_logout} isLogin={isLogin} isAdmin={Admin} userData={users}/>
     )
 };
 
