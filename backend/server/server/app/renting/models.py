@@ -1,5 +1,4 @@
 from django.db import models
-from server.app.core.models import TimestampedModel
 from server.app.user.models import User
 from server.app.station.models import Station
 from server.app.slots.models import Slots
@@ -16,5 +15,6 @@ class Renting(models.Model):
     slot =  models.ForeignKey(Slots,related_name="rent_slot_id",on_delete=models.DO_NOTHING)
     bike =  models.ForeignKey(Bike,related_name="rent_bike_id",on_delete=models.DO_NOTHING)
     date = models.DateField()
+    
     def __str__(self):
         return str(self.id)

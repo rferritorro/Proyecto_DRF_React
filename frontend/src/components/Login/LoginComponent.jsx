@@ -42,8 +42,6 @@ const LoginComponent = (props) => {
         }else {
             setErrorPassword("")
         }
-
-
     } 
     
     return (

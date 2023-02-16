@@ -26,6 +26,7 @@ class User(models.Model):
         #dt = datetime.now() + timedelta(minutes=60)
 
         token = jwt.encode({
+            'id': self.id,
             'username': self.username,
             #'exp': int(dt.strftime('%s'))
         }, settings.SECRET_KEY, algorithm='HS256')
