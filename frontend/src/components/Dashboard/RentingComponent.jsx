@@ -2,6 +2,7 @@ import React from "react";
 import "./dashboard.css"
 
 const RentingComponent = (props) => {
+    console.log(props)
     return (
         <div className="m-5">
             <h3 className="text-center text-primary"><u>RENTS</u></h3><p></p>

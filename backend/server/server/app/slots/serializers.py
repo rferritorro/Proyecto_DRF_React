@@ -26,12 +26,23 @@ class SlotSerializer(serializers.ModelSerializer):
     
     def AllSlots():
         slots = Slots.objects.all()
-        serialized_bikes = []
+        serialized_slots = []
 
         for slot in slots.iterator():
             new_bike = SlotSerializer.to_slots(slot)
             station = StationSerializer.getOneStation(id = new_bike["station_id"])
             new_bike["station_id"] = station
-            serialized_bikes.append(new_bike)
+            serialized_slots.append(new_bike)
 
-        return serialized_bikes
+        return serialized_slots
+    
+    def GetSlotByStation(context):
+        queryset = Slots.objects.filter(station_id = context["station_id"])
+        print(queryset)
+        serialized_slots = []
+        
+        for slot in queryset.iterator():
+            new_slot = SlotSerializer.to_slots(slot)
+            serialized_slots.append(new_slot)
+
+        return serialized_slots

@@ -12,5 +12,5 @@ export function useBike() {
 
     return {
         bike: bike
-    }
+    }                             
 }
