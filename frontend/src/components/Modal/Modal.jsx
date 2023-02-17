@@ -1,33 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Modal.css"
 import Button from 'react-bootstrap/Button';
-import { useNavigate } from "react-router-dom";
 import Modal from 'react-bootstrap/Modal';
-import {  toast } from 'react-toastify';
 import { useStation } from "../../hooks/useStation";
 
 const ModalComponent = (props) => {
-    const {deleteStation} = useStation();
-    const navigate = useNavigate();
-    const delStation = (data) => {
-        deleteStation(data)
-        toast.warn('🚲 Deleted Station!', {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-        })
-        navigate('/dashboard')
+    const [nameStation, setnameStation] = useState()
+    const [img, setImg] = useState()
+    const [long, setLong] = useState()
+    const [lat, setLat] = useState()
+    const formUpdate = {
+        "name": nameStation ? nameStation: props.info?.name,
+        "img": img ? img : props.info?.img,
+        "long": long ? long : props.info?.long,
+        "lat": lat ? lat : props.info?.lat
     }
+    const {deleteStation, updateStation} = useStation();
     if (!props.show) {
         return null
     }
     let bkng;
     let del;
+    let update_name;
+    let update;
     if (!props.info) {
         bkng =  
         <Modal show={props.show} onHide={props.onClose} size="lg"
@@ -37,9 +32,28 @@ const ModalComponent = (props) => {
         </Modal>  
     }
     if (props.admin) {
-        del = <Button variant="danger" onClick={() => delStation(props.info?.id)}>
+        del =   <Button variant="danger" onClick={() => deleteStation(props.info?.id)}>
                     Delete
-            </Button> 
+                </Button>
+        update_name = <input type={"text"} onKeyUp={event => setnameStation(event.target.value)} className="m-2 bg-transparent border-0" defaultValue={formUpdate.name}/>
+        update = <p>
+                    <p>
+                        <strong>Img:</strong>
+                        <input type={"text"} onKeyUp={event => setImg(event.target.value)} className="m-2 bg-transparent border-0" defaultValue={formUpdate.img}/>
+                    </p>
+                    <strong>Long:</strong>
+                    <input type={"text"} onKeyUp={event => setLong(event.target.value)} className="m-2 bg-transparent border-0" defaultValue={formUpdate.long}/>
+                    <strong>Lat:</strong>
+                    <input type={"text"} onKeyUp={event => setLat(event.target.value)} className="m-2 bg-transparent border-0" defaultValue={formUpdate.lat}/>
+                    <p></p>
+                    <Button variant="primary" onClick={() => updateStation(formUpdate, props.info?.id)}>
+                        Update
+                    </Button>
+                </p>
+       
+    }
+    if (!props.admin) {
+        update_name = <strong>{formUpdate.name}</strong>
     }
     console.log(props)
     if (props.info) {
@@ -47,16 +61,11 @@ const ModalComponent = (props) => {
         aria-labelledby="contained-modal-title-vcenter"
         centered>
             <Modal.Header closeButton>
-                <Modal.Title>STATION {props.info?.id}</Modal.Title>
+                <Modal.Title>{update_name}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <p>
-                    <strong>
-                    {props.info?.name}
-                    </strong>
-                </p>
-                <p>Slots: {props.info?.bikes}</p>
-                <img className="w-75" src={props.info.img}/>
+                <img className="w-75" src={formUpdate.img}/>
+                {update}
             </Modal.Body>
             <Modal.Footer>
                 {del}

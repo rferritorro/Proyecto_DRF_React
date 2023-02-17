@@ -11,6 +11,7 @@ import Dashboard from './pages/Dashboard/Dashboard'
 import CreateStation from './components/Dashboard/stations/CreateStation';
 import AuthGuardAdmin from "./services/AuthGuard/AuthGuardAdmin";
 import AuthGuardUser from "./services/AuthGuard/AuthGuardUser";
+import AuthGuardNotUser from "./services/AuthGuard/AuthGuardNotUser";
 import About from './pages/About/About'
 import {UserContextProvider} from './context/UserContext'
 import { Routes, Route, BrowserRouter } from "react-router-dom";
@@ -31,7 +32,9 @@ function App() {
               <Route path='/login' element={<Login />} />
               <Route path='/register' element={<Register />} />
             </Route>
+            <Route element={<AuthGuardNotUser />}>
               <Route path='/profile' element={<Profile />} />
+            </Route>
             <Route element={<AuthGuardAdmin />}>
               <Route path='/dashboard/add_station' element={<CreateStation />} />
               <Route path='/dashboard' element={<Dashboard />} />

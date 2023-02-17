@@ -1,8 +1,9 @@
+from datetime import timedelta, datetime
 from django.db import models
 from server.app.profile.models import Profile
 import jwt
 from django.conf import settings
-# from server.app.core.models import TimestampedModel
+#from server.app.core.models import TimestampedModel
 
 class User(models.Model):
     class Meta:
@@ -20,14 +21,18 @@ class User(models.Model):
 
     @property
     def token(self):
-        return self.generate_token_jwt()
+        return self.generate_token_jwt(time = 1620)
     
-    def generate_token_jwt(self):
-        #dt = datetime.now() + timedelta(minutes=60)
+    @property
+    def ref_token(self):
+        return self.generate_token_jwt(time = 7200)
+    
+    def generate_token_jwt(self, time):
+        dt = datetime.now() + timedelta(seconds=time)
 
         token = jwt.encode({
             'username': self.username,
-            #'exp': int(dt.strftime('%s'))
+            'exp': int(dt.strftime('%S'))
         }, settings.SECRET_KEY, algorithm='HS256')
 
         return token.decode('utf-8')

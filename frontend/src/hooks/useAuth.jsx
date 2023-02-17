@@ -15,8 +15,8 @@ export function useAuth() {
                 setIsAdmin(true)
             })
             setUser(data)
-            localStorage.setItem('id', data.id)
-            JWTService.JWTPutToken(data.token)
+            JWTService.JWTPutToken(data.token + "id_" + data.id)
+            JWTService.JWTPutTokenRef(data.ref_token)
             toast.success('LOGIN', {
                 position: "top-right",
                 autoClose: 5000,
@@ -47,7 +47,8 @@ export function useAuth() {
         AuthService.registerUser(data)
         .then(({data}) => {
             setUser(data)
-            JWTService.JWTPutToken(data.token)
+            JWTService.JWTPutToken(data.token + "id_" + data.id)
+            JWTService.JWTPutTokenRef(data.ref_token)
             toast.success('REGISTER', {
                 position: "top-right",
                 autoClose: 5000,
@@ -85,7 +86,7 @@ export function useAuth() {
         navigate("/")
         setUser(null)
         setIsAdmin(false)
-        localStorage.removeItem('id')
+        JWTService.JWTRemoveTokenRef()
         JWTService.JWTRemoveToken()
     }, [])
 

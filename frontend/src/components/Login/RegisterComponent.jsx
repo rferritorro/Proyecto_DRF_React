@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import './Auth.css'
-import {AiOutlineUserAdd, AiOutlineMail} from 'react-icons/ai'
+import {AiOutlineUserAdd, AiOutlineMail, AiFillEye, AiFillEyeInvisible} from 'react-icons/ai'
 import {RiLockPasswordFill} from 'react-icons/ri'
 import {RxAvatar} from 'react-icons/rx'
 import {Link} from 'react-router-dom'
@@ -109,12 +109,30 @@ const RegisterComponent = (props) => {
                 <span className="text-danger">{errorAvatar}</span><p></p>
                 <div className="form-field d-flex align-items-center"> 
                     <RiLockPasswordFill style={{fontSize: "40px"}}/>
-                    <input onKeyUp={event => setPassword(event.target.value)} type={"password"} placeholder={"password"} />
+                    {
+                        props.eye ?
+                        <input onKeyUp={event => setPassword(event.target.value)} type={"text"} placeholder={"password"} />:
+                        <input onKeyUp={event => setPassword(event.target.value)} type={"password"} placeholder={"password"} />
+                    }
+                    {
+                        props.eye ?
+                        <AiFillEye onClick={() => props.viewEye(false)} style={{ fontSize: "40px" }} />:
+                        <AiFillEyeInvisible onClick={() => props.viewEye(true)} style={{ fontSize: "40px" }} />
+                    }
                 </div>
                 <span className="text-danger">{errorPassword}</span><p></p>        
                 <div className="form-field d-flex align-items-center"> 
                     <RiLockPasswordFill style={{fontSize: "40px"}}/>
-                    <input onKeyUp={event => setPassword2(event.target.value)} type={"password"} placeholder={"confirm password"} />
+                    {
+                        props.eye ?
+                        <input onKeyUp={event => setPassword2(event.target.value)} type={"text"} placeholder={"confirm password"} />:
+                        <input onKeyUp={event => setPassword2(event.target.value)} type={"password"} placeholder={"confirm password"} />
+                    }
+                    {
+                        props.eye ?
+                        <AiFillEye onClick={() => props.viewEye(false)} style={{ fontSize: "40px" }} />:
+                        <AiFillEyeInvisible onClick={() => props.viewEye(true)} style={{ fontSize: "40px" }} />
+                    }
                 </div>                
                 <span className="text-danger">{errorPassword2}</span><p></p> 
                 <button onClick={submitRegister} className="btn mt-3">Register</button>

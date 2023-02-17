@@ -26,3 +26,12 @@ class StationSerializer(serializers.ModelSerializer):
             img = context["img"]
         )
         return station
+
+    def getOneStation(id):
+        station = Station.objects.get(id = id)
+        serialized_station = StationSerializer.to_station(station)
+        return serialized_station
+
+    def UpdateStation(context, id):
+        Station.objects.bulk_update([Station(id=id, name=context['name'], long=context['long'], lat=context['lat'], img=context['img'])], fields=["name", "long", "lat", "img"])
+        return "Correct"

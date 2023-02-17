@@ -13,8 +13,11 @@ const ProfilePage = () => {
     const {updateProfile} = useAuth();
     console.log(users)
     const [settings, setSetting] = useState(false)
+    const [eye, setEye] = useState(false)
+    const viewEye = (value) => {
+        setEye(value)
+    }
     const isSettings = ()=> {
-        console.log("SETTINGS")
         setSetting(true)
     }
     const submit = (form, id)=> {
@@ -23,7 +26,7 @@ const ProfilePage = () => {
     }
     return (
         <Suspense fallback={<div className="text-center"><img className="w-25" src="./lazy-loading.gif"/></div>}>
-            <ProfileComponent userData={users} isSettings={isSettings} update={settings} submit={submit}/>
+            <ProfileComponent userData={users} isSettings={isSettings} update={settings} submit={submit} viewEye={viewEye} eye={eye}/>
         </Suspense>
     )
 }

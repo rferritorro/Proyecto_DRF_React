@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {FiSettings} from 'react-icons/fi'
 import {MdSend} from 'react-icons/md'
-import {AiFillEye} from 'react-icons/ai'
+import {AiFillEye, AiFillEyeInvisible} from 'react-icons/ai'
 import "./ProfileComponent.css"
 const ProfileComponent = (props) => {
     const [valueUsername, setUsername] = useState()
@@ -37,11 +37,23 @@ const ProfileComponent = (props) => {
             <p></p>
             <strong>Password:</strong>
             {
-                props.update ?
+                props.eye ?
                 <input type="text" onKeyUp={event => setPassword(event.target.value)} className="m-2 text-center bg-transparent" defaultValue={formProfile.password}/>:
-                <input type="password" readOnly className="m-2 text-center bg-transparent border-0" value={formProfile.password}/>
+                <input type="password" className="m-2 text-center bg-transparent border-0" defaultValue={formProfile.password}/>
             }
-            <AiFillEye className="btn btn-link" style={{ fontSize: "70px" }} />
+            {
+                props.update ?
+                <strong>
+                    {
+                        props.eye ?
+                        <AiFillEye onClick={() => props.viewEye(false)} className="btn btn-link" style={{ fontSize: "70px" }} /> :
+                        <AiFillEyeInvisible onClick={() => props.viewEye(true)} className="btn btn-link" style={{ fontSize: "70px" }} />
+                    }
+                </strong>:
+                <div></div>
+            }
+           
+
             <div>
                 <img className="w-25 m-3" src={formProfile.avatar} />
                 <p></p>

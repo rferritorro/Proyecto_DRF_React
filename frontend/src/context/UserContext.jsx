@@ -7,6 +7,7 @@ export function UserContextProvider({ children }) {
     //const [jwt, setJWT] = useState(() => checkUser());
     const [users, setUser] = useState(null)
     const [ Admin, setIsAdmin ] = useState(false);
+    let id = JWTGetToken()?.split("id_")[1]
     const navigate = useNavigate()
     useEffect(() => {
         isAdmin()
@@ -15,7 +16,7 @@ export function UserContextProvider({ children }) {
     }, [])
     const checkUser = async () => {
         if (JWTGetToken()) {
-            const res = await AuthService.getProfile(localStorage.getItem('id'))
+            const res = await AuthService.getProfile(id)
             if (res) {
                 setUser(res.data)
             }
@@ -26,7 +27,7 @@ export function UserContextProvider({ children }) {
     }
     const isAdmin = async () => {
         if (JWTGetToken()) {
-            const res = await AuthService.isAdmin(localStorage.getItem('id'))
+            const res = await AuthService.isAdmin(id)
             if (res) {
                 console.log(res)
                 setIsAdmin(true)

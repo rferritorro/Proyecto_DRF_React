@@ -3,9 +3,7 @@ import './MapBoxComponent.css';
 import mapboxgl from 'mapbox-gl';
 import {Map, Marker} from 'react-map-gl';
 import secret from "../../secret"
-//import Button from 'react-bootstrap/Button';
 import Modal from '../../components/Modal/Modal'
-//import Modal from 'react-bootstrap/Modal';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -42,7 +40,6 @@ const MapBoxComponent = (props) => {
                 ))}
                 <Modal onClose={() => setShow(false)} show={show} info={info} admin={props?.admin}></Modal>
                 {marker_red}
-                {/* <Modal onClose={() => setShow(false)} show={show} info={info}/> */}
             </Map>
         </div>;
 

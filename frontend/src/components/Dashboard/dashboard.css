@@ -1,0 +1,20 @@
+.tbl-header {
+    overflow:auto; 
+    max-height:300px;
+}
+
+.inc, .rent, .slot, .bik {
+    width: 170px;
+}
+
+.user {
+    width: 164px;
+}
+
+.descr, .ans {
+    width: 407px;
+}
+
+.stat {
+    width: 250px;
+}

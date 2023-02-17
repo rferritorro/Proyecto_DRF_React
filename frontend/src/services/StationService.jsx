@@ -7,6 +7,9 @@ const StationService = {
     addStation(data) {
         return http().post("/server/station_add", data)
     },
+    putStation(data,id) {
+        return http().put("/server/station_put/"+ id, data)
+    },
     deleteStation(id) {
         return http().delete("/server/station_delete/" + id)
     }

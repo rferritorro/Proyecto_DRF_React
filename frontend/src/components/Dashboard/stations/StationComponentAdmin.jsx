@@ -4,35 +4,21 @@ import '../../Stations/StationsComponent.css'
 import Button from 'react-bootstrap/Button';
 import {Link} from 'react-router-dom'
 import {MdDelete} from 'react-icons/md'
+import {BsFillExclamationTriangleFill} from "react-icons/bs"
 import { useStation } from "../../../hooks/useStation";
+import {useSlot} from "../../../hooks/useSlot"
 import {  toast } from 'react-toastify';
 import PaginationComponent from "../../Pagination/PaginationComponent";
 
-const StationComponent = () => {
+const StationComponent = (props) => {
     const stations = useStation();
     const {deleteStation} = useStation();
+    const {slots} = useSlot()
     const [actualPage, setActualPage] = useState(1);
     const [postsPerPage] = useState(3);
     const [stations_filtered1, setFilter1] = useState(0)
     const [stations_filtered2, setFilter2] = useState(3)
-
-   // ...
- 
-    // const [stations, setStations] = useState()
-    const delStation = (data) => {
-        deleteStation(data)
-        toast.warn('🚲 Deleted Station!', {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-        })
-    }
- 
+    console.log(slots)
     const paginates = (number) => {
         setActualPage(number)
         console.log(actualPage)
@@ -62,20 +48,24 @@ const StationComponent = () => {
             <div className="stationsDiv">
                 {stations.station?.slice(stations_filtered1, stations_filtered2).map((data, index)  => (
                         <div className="stationsDivMap">
-                            <h2 className="stationDescr" key={index} >STATION: {data.id}</h2>
-                            <p className="stationDescr">{data.name}</p>
-                            <p className="stationDescr">Slots: {data.bikes}</p>
-                            {/* <Button variant="danger" onClick={() => delStation(data.id)}>
-                                <MdDelete style={{fontSize: "30px"}}/>
-                            </Button>  */}
-                            <img className="w-75 m-4" src={data.img}/>
+                            <div className="position-absolute">
+                                {
+                                    slots?.map((data2, index2) => (
+                                        data2.station_id.id === data.id && !data2.state ?
+                                        <BsFillExclamationTriangleFill title={`Slot averiado`} className={"text-warning"} style={{fontSize: "40px"}}/>:
+                                        <p></p>                        
+                                        ))
+                                }
+                            </div>
+                                <h2 className="stationDescr" key={index} >STATION: {data.id}</h2>
+                                <p className="stationDescr">{data.name}</p>
+                                <p className="stationDescr">Slots: {data.bikes}</p>
+                                <img className="w-75 m-4" src={data.img}/>
                         </div>
-                ))}  
+                ))}
             </div>
             <div>
-                <PaginationComponent total={stations.station?.length} stations={stations.station?.slice(stations_filtered1, stations_filtered2)} pages={postsPerPage} paginates={paginates}/>
-                {/* {blogPosts ? (
-                ): (<div>LOADING...</div>)} */}                
+                <PaginationComponent total={stations.station?.length} stations={stations.station?.slice(stations_filtered1, stations_filtered2)} pages={postsPerPage} paginates={paginates}/>        
             </div>
         </div>
     )

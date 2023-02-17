@@ -1,5 +1,5 @@
 .stationComponentAdmin {
-    background-color: rgb(158, 192, 255);
+    background-color: rgb(217, 230, 255);
 }
 
 .stationsDiv {
@@ -9,10 +9,10 @@
 }
 
 .stationsDivMap {
-    height: 400px;
+    height: 450px;
     width: 400px;
     margin: 2%;
-    background-color: rgb(188, 234, 255);
+    background-color: rgb(181, 254, 255);
 }
 
 .stationDescr {

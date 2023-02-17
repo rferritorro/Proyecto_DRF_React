@@ -14,6 +14,13 @@ class BikeSerializer(serializers.ModelSerializer):
             "id": instance.id,
             "state":instance.state,
         }
+
+    def getBike(id):
+        bike = Bike.objects.get(id = id)
+        serialized_bike = BikeSerializer.to_bikes(bike)
+        return serialized_bike
+
+    
     def AllBikes():
         bikes = Bike.objects.all()
         serialized_bikes = []

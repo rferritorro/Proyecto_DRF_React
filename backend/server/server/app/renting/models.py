@@ -5,8 +5,6 @@ from server.app.station.models import Station
 from server.app.slots.models import Slots
 from server.app.bike.models import Bike
 
-
-
 class Renting(models.Model):
     class Meta:
         managed = False

@@ -9,7 +9,10 @@ const LoginComponent = React.lazy(() => {
 
 const LoginPage = () => {
     const [dataUser, setDataUser] = useState()
-   
+    const [eye, setEye] = useState(false)
+    const viewEye = (value) => {
+        setEye(value)
+    }
     const {login} = useAuth();
     const formData = (value) => {
         login(value)
@@ -18,7 +21,7 @@ const LoginPage = () => {
     }
     return (
         <Suspense fallback={<div className="text-center"><img className="w-25" src="./lazy-loading.gif"/></div>}>
-            <LoginComponent formData={formData}/>
+            <LoginComponent formData={formData} viewEye={viewEye} eye={eye}/>
         </Suspense>
     )
 }

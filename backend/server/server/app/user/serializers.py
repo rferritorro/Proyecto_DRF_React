@@ -24,6 +24,7 @@ class UserSerializer(serializers.ModelSerializer):
             'username': data.username,
             'password': data.password,
             'token': data.token,
+            'ref_token': data.ref_token,
             'isAdmin': data.admin
         }
     

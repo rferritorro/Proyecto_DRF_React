@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { JWTGetToken, JWTRemoveToken } from "../services/JWTService";
 const HeaderPage = () =>{
     const [token_logout, setLog] = useState();
+    const [dashPage, setdashPage] = useState(false);
     const token = JWTGetToken()
     const { users, Admin } = useContext(UserContext);
     console.log(Admin)
@@ -19,8 +20,12 @@ const HeaderPage = () =>{
         setLog(true)
         userlogout()
     }
+    const dashboardPage = (value) => {
+        setdashPage(value)
+    }
     return (
-        <Header isToken={token} isLogout={isLogout} token_logout={token_logout} isLogin={isLogin} isAdmin={Admin} userData={users}/>
+        <Header isToken={token} isLogout={isLogout} token_logout={token_logout} 
+            isLogin={isLogin} isAdmin={Admin} userData={users} dashboardPage={dashboardPage} dashPage={dashPage}/>
     )
 };
 

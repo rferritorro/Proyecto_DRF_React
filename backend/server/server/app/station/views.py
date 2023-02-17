@@ -10,17 +10,20 @@ class StationView(viewsets.GenericViewSet):
         serializer = StationSerializer(queryset,many=True).data
         return Response(serializer,status=status.HTTP_200_OK)
 
+    def GetStationByID(self, request, *args , **kwargs):
+        station = StationSerializer.getOneStation(id= kwargs["id"])
+        return Response(station,status=status.HTTP_200_OK)
+
     def CreateStation(self, request):
         serializer_data = request.data
         StationSerializer.CreateStation(context=serializer_data)
         return Response({"ADDED NEW STATION SUCCESFULL"}, status=status.HTTP_201_CREATED)
-    def UpdateStation(self, request):
+
+    def UpdateStation(self, request, id):
         serializer_data = request.data
-        StationSerializer.UpdateStation(context=serializer_data)
-        # serializer = self.serializer_class(
-        #     data = serializer_data
-        # )
-        return Response({"STATION UPDATED SUCCESFULL"}, status=status.HTTP_201_CREATED)
+        update = StationSerializer.UpdateStation(context=serializer_data, id= id)
+        return Response(update, status=status.HTTP_201_CREATED)
+
     def DeleteStation(self, request, id):
         try:
             station = Station.objects.get(id=id)

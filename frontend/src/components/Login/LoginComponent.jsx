@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import './Auth.css'
-import {AiOutlineUserAdd} from 'react-icons/ai'
+import {AiOutlineUserAdd, AiFillEye, AiFillEyeInvisible} from 'react-icons/ai'
 import {RiLockPasswordFill} from 'react-icons/ri'
 import {Link} from 'react-router-dom'
 
@@ -62,7 +62,16 @@ const LoginComponent = (props) => {
                 <span className="text-danger">{errorUsername}</span><p></p>
                 <div className="form-field d-flex align-items-center"> 
                     <RiLockPasswordFill style={{fontSize: "40px"}}/>
-                    <input onKeyUp={event => setPassword(event.target.value)} type={"password"} placeholder={"password"} />
+                    {
+                        props.eye ?
+                        <input onKeyUp={event => setPassword(event.target.value)} type={"text"} placeholder={"password"} />:
+                        <input onKeyUp={event => setPassword(event.target.value)} type={"password"} placeholder={"password"} />
+                    }
+                    {
+                        props.eye ?
+                        <AiFillEye onClick={() => props.viewEye(false)} style={{ fontSize: "40px" }} />:
+                        <AiFillEyeInvisible onClick={() => props.viewEye(true)} style={{ fontSize: "40px" }} />
+                    }
                 </div>
                 <span className="text-danger">{errorPassword}</span>                
                 <button className="btn mt-3" onClick={submitLogin}>Login</button>

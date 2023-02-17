@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'server.app.bike.BikeAppConfig',
     'server.app.renting.RentingAppConfig',
     'server.app.alerts.AlertsAppConfig',
+    'server.app.incidence.IncidenceAppConfig',
     'corsheaders',
     'django.contrib.auth',
     'django.contrib.contenttypes',
