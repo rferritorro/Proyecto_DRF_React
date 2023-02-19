@@ -13,6 +13,36 @@ export function useIncidence() {
         })
     }, [setIncidence])
 
+    const getIncidencesProfile = useCallback((id) => {
+        IncidenceService.getIncidencesProfile(id)
+        .then(({data}) => {
+            console.log(data)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+    })
+
+    const createIncidence = useCallback((data) => {
+        IncidenceService.createIncidence(data)
+        .then(({data}) => {
+            console.log(data)
+            toast.success('🚲 Incidence created!', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            })
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+    })
+
     const putAnswer = useCallback((data,id) => {
         IncidenceService.putAnswerAdmin(data,id)
         .then(({data}) => {
@@ -27,6 +57,7 @@ export function useIncidence() {
                 progress: undefined,
                 theme: "dark",
             })
+            navigate("/dashboard")
         })
         .catch((error) => {
             console.log(error)
@@ -35,6 +66,6 @@ export function useIncidence() {
     })
 
     return {
-        incidence: incidence, putAnswer
+        incidence: incidence, putAnswer, createIncidence, getIncidencesProfile
     }
 }

@@ -8,6 +8,14 @@ class IncidenceView(viewsets.GenericViewSet):
         serializer = IncidenceSerializer.getIncidences()
         return Response(serializer, status=status.HTTP_200_OK)
 
+    def GetIncidenceProfile(self, request, id):
+        serializer = IncidenceSerializer.GetIncidenceProfile(id=id)
+        return Response(serializer, status=status.HTTP_200_OK)
+
+    def PostIncidences(self, request):
+        serializer = IncidenceSerializer.PostIncidences(context=request.data)
+        return Response(serializer, status=status.HTTP_200_OK)
+
     def PutAnswer(self, request, id):
         serializer = IncidenceSerializer.putAnswer(data=request.data, id=id)
         return Response(serializer,status=status.HTTP_200_OK)

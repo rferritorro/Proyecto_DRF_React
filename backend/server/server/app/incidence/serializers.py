@@ -29,6 +29,26 @@ class IncidenceSerializer(serializers.ModelSerializer):
             serializer.append(serializer_incidence)
 
         return serializer
+
+    def GetIncidenceProfile(id):
+        incidence = Incidence.objects.filter(user_id=id)
+        serializer = []
+
+        for incidence in incidence.iterator():
+            serializer_incidence = IncidenceSerializer.to_incidence(incidence)
+            serializer.append(serializer_incidence)
+
+        return serializer
+
+    def PostIncidences(context):
+        incidence = Incidence.objects.create(
+            user_id = context["user_id"],
+            description = context["description"],
+            answer = context["answer"],
+            state = context["state"]
+        )
+        incidence_serializer = IncidenceSerializer.to_incidence(incidence)
+        return incidence_serializer
     
     def putAnswer(data, id):
         Incidence.objects.bulk_update([Incidence(id=id, answer=data["answer"], state=data["state"])], fields=["answer", "state"])

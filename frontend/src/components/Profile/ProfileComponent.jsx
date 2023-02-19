@@ -16,7 +16,7 @@ const ProfileComponent = (props) => {
         "password": valuePassword ? valuePassword: props.userData?.password,
     }
     return (
-        <div className="w-75 border text-center m-5">
+        <div className="border text-center m-5">
             <div className="bg-primary p-3 text-center">
                 <h5>
                     <strong>Username: </strong>

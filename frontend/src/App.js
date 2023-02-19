@@ -6,6 +6,7 @@ import Home from './pages/Home/Home'
 import Stations from './pages/Stations'
 import Login from './pages/Login/Login'
 import Profile from './pages/Profile/Profile'
+import IncidenceProfile from './components/Incidence/IncidencesProfile'
 import Register from './pages/Login/Register'
 import Dashboard from './pages/Dashboard/Dashboard'
 import CreateStation from './components/Dashboard/stations/CreateStation';
@@ -34,6 +35,7 @@ function App() {
             </Route>
             <Route element={<AuthGuardNotUser />}>
               <Route path='/profile' element={<Profile />} />
+              <Route path='/profile/incidences' element={<IncidenceProfile />} />
             </Route>
             <Route element={<AuthGuardAdmin />}>
               <Route path='/dashboard/add_station' element={<CreateStation />} />

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./dashboard.css"
+import { Link } from 'react-router-dom'
 import { useIncidence } from "../../hooks/useIncidence";
 import {AiFillCheckCircle} from "react-icons/ai"
 import {RiQuestionAnswerFill} from "react-icons/ri"
@@ -7,13 +8,15 @@ import {MdCancel, MdSend} from "react-icons/md"
 
 
 const IncidenceComponent = (props) => {
+    console.log(props)
     const [viewAnswer, SetView] = useState(false)
     const [idAnswer, SetId] = useState()
     const [answer, SetAnswer] = useState()
+    const [state, SetState] = useState()
     const {putAnswer} = useIncidence()
     const formAnswer = {
         "answer": answer,
-        "state": "1"
+        "state": state ? state : 1
     }
     const submit = (id) => {
         putAnswer(formAnswer, id)
@@ -50,22 +53,21 @@ const IncidenceComponent = (props) => {
                                     }
                                 </td>
                                 {
-                                    data.state != 1 ?
+                                    data.state != 1  ?
                                 <td>
                                     {
                                         viewAnswer && idAnswer == data.id ?
                                         <RiQuestionAnswerFill onClick={() => [SetView(false), SetId(data.id)]} style={{ fontSize: "30px" }} />:
                                         <RiQuestionAnswerFill onClick={() => [SetView(true), SetId(data.id)]} style={{ fontSize: "30px" }} className="text-primary"/>
                                     }
-                                    <Link>
-                                        <MdSend onClick={() => submit(data.id)} style={{ fontSize: "30px" }} className="text-primary"/>
-                                    </Link>
+                                    <MdSend onClick={() => submit(data.id)} style={{ fontSize: "30px" }} className="text-primary"/>
                                     <MdCancel onClick={() => SetView(false)} style={{ fontSize: "30px" }} className="text-danger"/>
                                 </td>:
                                 <td>
                                     <AiFillCheckCircle style={{ fontSize: "30px" }} className="text-success"/>
                                 </td>
                                 }
+                                
                             </tr>
                         ))}
                     </tbody>
