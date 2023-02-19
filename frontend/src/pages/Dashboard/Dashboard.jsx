@@ -1,4 +1,4 @@
-import React, {Suspense, useEffect} from "react";
+import React, {Suspense, useEffect, useState} from "react";
 import { useRent } from "../../hooks/useRent";
 import { useIncidence } from "../../hooks/useIncidence";
 const StationsAdmin = React.lazy(() => {
@@ -19,7 +19,8 @@ const IncidenceAdmin = React.lazy(() => {
 
 const StationsPageAdmin = () =>{
     const {rent} = useRent()
-    const {incidence} = useIncidence()
+    const {incidence} =  useIncidence()
+    console.log(incidence)
     return (
         <Suspense fallback={<div className="text-center"><img className="w-25" src="./lazy-loading.gif"/></div>}>
                 <h1 className="text-center">PANEL DASHBOARD</h1>
