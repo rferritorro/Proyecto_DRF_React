@@ -25,6 +25,7 @@ urlpatterns = [
     path('server/slots', include('server.app.slots.urls')),
     path('server/bike', include('server.app.bike.urls')),
     path('server/renting', include('server.app.renting.urls')),
+    path('server/history', include('server.app.history.urls')),
     path('server/alerts', include('server.app.alerts.urls')),
     path('server/incidence', include('server.app.incidence.urls'))
 ]

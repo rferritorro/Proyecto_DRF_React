@@ -8,7 +8,7 @@ import {IoMdNotifications} from 'react-icons/io'
 const HeaderComponent = (props) => {
     console.log(props)
     return (
-        <nav className={`navbar navbar-expand-lg navbar-light ${props.dashPage ? "bg-dark": "bg-light"} `}>
+        <nav className={`navbar navbar-expand-lg navbar-light ${props.dashPage ? "bg-dark": "bg-light"}`}>
                 <Link to={"/"} className="navbar-brand">
                         <img className="w-25 m-4" src="/logo_biosbike.png" onClick={() => props.dashboardPage(false)}/>
                 </Link>
@@ -33,6 +33,17 @@ const HeaderComponent = (props) => {
                                 <strong className={`h2 ${props.dashPage ? "text-white": "text-primary"}`} onClick={() => props.dashboardPage(false)}>About</strong>
                             </Link>
                         </li>
+                        {
+                        props.isToken 
+                        ?
+                        <li className="nav-item m-3">
+                            <Link to={"/history"} className="nav-link">
+                                <strong className={`h2 ${props.dashPage ? "text-white": "text-primary"}`} onClick={() => props.dashboardPage(false)}>History</strong>
+                            </Link>
+                        </li>
+                        : 
+                        null
+                        }
                         <li className="nav-item m-3">
                             {
                                 props.isAdmin ? 

@@ -11,7 +11,7 @@ class User(models.Model):
         db_table = "_user"
     username = models.CharField('username',max_length=15)
     password = models.CharField('password',max_length=200)
-    admin = models.BooleanField('admin',max_length=100)
+    admin = models.BooleanField('admin')
     profile =  models.ForeignKey(Profile,related_name="profile_id",on_delete=models.DO_NOTHING)
 
     USERNAME_FIELD = 'username'

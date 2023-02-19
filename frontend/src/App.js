@@ -3,6 +3,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import Header from './pages/Header'
 import Footer from './pages/Footer'
 import Home from './pages/Home/Home'
+import History from './pages/History/History'
 import Stations from './pages/Stations'
 import Login from './pages/Login/Login'
 import Profile from './pages/Profile/Profile'
@@ -36,6 +37,7 @@ function App() {
               <Route path='/profile' element={<Profile />} />
             </Route>
             <Route element={<AuthGuardAdmin />}>
+              <Route path='/history' element={<History />} />
               <Route path='/dashboard/add_station' element={<CreateStation />} />
               <Route path='/dashboard' element={<Dashboard />} />
             </Route>

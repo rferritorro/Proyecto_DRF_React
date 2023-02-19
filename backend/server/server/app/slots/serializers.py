@@ -38,7 +38,6 @@ class SlotSerializer(serializers.ModelSerializer):
     
     def GetSlotByStation(context):
         queryset = Slots.objects.filter(station_id = context["station_id"])
-        print(queryset)
         serialized_slots = []
         
         for slot in queryset.iterator():
