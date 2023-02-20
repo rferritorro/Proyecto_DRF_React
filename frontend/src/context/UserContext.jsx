@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import { JWTGetToken, JWTRemoveToken } from "../services/JWTService";
 import AuthService from "../services/AuthService"
 import { useNavigate } from "react-router-dom"
+import jwt_decode from "jwt-decode"
 const Context = React.createContext({})
 export function UserContextProvider({ children }) {
     //const [jwt, setJWT] = useState(() => checkUser());
     const [users, setUser] = useState(null)
     const [ Admin, setIsAdmin ] = useState(false);
-    let id = JWTGetToken()?.split("id_")[1]
+    
+    console.log(JWTGetToken())
     const navigate = useNavigate()
     useEffect(() => {
         isAdmin()
@@ -16,7 +18,8 @@ export function UserContextProvider({ children }) {
     }, [])
     const checkUser = async () => {
         if (JWTGetToken()) {
-            const res = await AuthService.getProfile(id)
+            const id = jwt_decode(JWTGetToken())
+            const res = await AuthService.getProfile(id.id)
             if (res) {
                 setUser(res.data)
             }
@@ -27,7 +30,8 @@ export function UserContextProvider({ children }) {
     }
     const isAdmin = async () => {
         if (JWTGetToken()) {
-            const res = await AuthService.isAdmin(id)
+            const id = jwt_decode(JWTGetToken())
+            const res = await AuthService.isAdmin(id.id)
             if (res) {
                 console.log(res)
                 setIsAdmin(true)

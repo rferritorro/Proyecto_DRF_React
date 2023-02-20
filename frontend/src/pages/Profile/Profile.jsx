@@ -8,6 +8,12 @@ const ProfileComponent = React.lazy(() => {
     })
 })
 
+const IncidenceCreateComponent = React.lazy(() => {
+    return new Promise(resolve => {
+        setTimeout(() => resolve(import("../../components/Incidence/IncidenceCreateComponent")), 1500)
+    })
+})
+
 const ProfilePage = () => {
     const {users} = useContext(UserContext);
     const {updateProfile} = useAuth();
@@ -27,6 +33,7 @@ const ProfilePage = () => {
     return (
         <Suspense fallback={<div className="text-center"><img className="w-25" src="./lazy-loading.gif"/></div>}>
             <ProfileComponent userData={users} isSettings={isSettings} update={settings} submit={submit} viewEye={viewEye} eye={eye}/>
+            <IncidenceCreateComponent />
         </Suspense>
     )
 }
