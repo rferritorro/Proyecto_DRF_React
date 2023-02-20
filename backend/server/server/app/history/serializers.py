@@ -25,7 +25,9 @@ class HistorySerializer(serializers.ModelSerializer):
         }
     
     def GetHistoryByUser(context):
-        user_decode = jwt.decode(context['token'], settings.SECRET_KEY)
+        user_decode = jwt.decode("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJyZmVycml0b3JybyIsImV4cCI6MTY3NjgzOTk4OX0.AwybmG6gy_0Int8LzL9_Q7wOL1anwd5M-ctWNmLptVkid_1", 'django-insecure-p#@dw-g_c3n0!cj6#j)f&g2uzh&%l^lmb6f0!ivr^oe=2ul_5f')
+        print(user_decode)
+        return False
         history = History.objects.all().filter(user_id=user_decode["id"])
         serializer = []
 

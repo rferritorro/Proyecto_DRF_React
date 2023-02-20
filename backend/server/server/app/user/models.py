@@ -21,20 +21,20 @@ class User(models.Model):
 
     @property
     def token(self):
-        return self.generate_token_jwt(time = 1620)
+        return self.generate_token_jwt(60)
     
     @property
     def ref_token(self):
-        return self.generate_token_jwt(time = 7200)
+        return self.generate_token_jwt(10)
     
     def generate_token_jwt(self, time):
-        dt = datetime.now() + timedelta(seconds=time)
+        dt = datetime.now() + timedelta(minutes=time)
 
         token = jwt.encode({
             'id': self.id,
             'username': self.username,
-            'exp': int(dt.strftime('%S'))
-        }, settings.SECRET_KEY, algorithm='HS256')
+            'exp': int(dt.timestamp())  
+        }, "django-insecure-p#@dw-g_c3n0!cj6#j)f&g2uzh&%l^lmb6f0!ivr^oe=2ul_5f", algorithm='HS256')
 
         return token.decode('utf-8')
     def __str__(self):

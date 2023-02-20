@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import "./dashboard.css"
+import { useIncidence } from "../../hooks/useIncidence";
+import {Link} from 'react-router-dom'
 import {AiFillCheckCircle} from "react-icons/ai"
 import {RiQuestionAnswerFill} from "react-icons/ri"
 import {MdCancel, MdSend} from "react-icons/md"
@@ -9,9 +11,13 @@ const IncidenceComponent = (props) => {
     const [viewAnswer, SetView] = useState(false)
     const [idAnswer, SetId] = useState()
     const [answer, SetAnswer] = useState()
+    const {putAnswer} = useIncidence()
     const formAnswer = {
         "answer": answer,
         "state": "1"
+    }
+    const submit = (id) => {
+        putAnswer(formAnswer, id)
     }
     return (
         <div className="m-5">
@@ -52,7 +58,9 @@ const IncidenceComponent = (props) => {
                                         <RiQuestionAnswerFill onClick={() => [SetView(false), SetId(data.id)]} style={{ fontSize: "30px" }} />:
                                         <RiQuestionAnswerFill onClick={() => [SetView(true), SetId(data.id)]} style={{ fontSize: "30px" }} className="text-primary"/>
                                     }
-                                    <MdSend style={{ fontSize: "30px" }} className="text-primary"/>
+                                    <Link>
+                                        <MdSend onClick={() => submit(data.id)} style={{ fontSize: "30px" }} className="text-primary"/>
+                                    </Link>
                                     <MdCancel onClick={() => SetView(false)} style={{ fontSize: "30px" }} className="text-danger"/>
                                 </td>:
                                 <td>

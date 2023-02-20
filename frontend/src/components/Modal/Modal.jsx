@@ -161,30 +161,32 @@ const ModalComponent = (props) => {
             <Modal.Header closeButton>
                 <Modal.Title>{update_name}</Modal.Title>
             </Modal.Header>
-            <Modal.Body className="d-flex">
-                <img className="w-75" src={formUpdate.img}/>
-                {update}
+            <Modal.Body >
                 {/* <Modal.Title>{props.info?.name}</Modal.Title>
                 <img className="w-50" src={props.info.img}/> */}
-                <div className="d-flex flex-wrap w-50 h-50">
-                    {
-                        slotsbystation
-                        ?
-                        slotsbystation.map((slot) =>
+                <div className="d-flex">
+                    <img className="w-75" src={formUpdate.img}/>
+                    <div className="d-flex flex-wrap w-50 h-50">
+                        {
+                            slotsbystation && !props.admin
+                            ?
+                            slotsbystation.map((slot) =>
                             token_bike
                             ?
                             <div id={`slot-${slot.id}`} className={`w-50 p-2 border border-3 border-white ${slot.bike_id == 0 ? "bg-success" : "bg-danger"}`} onClick={() => RentBike(slot)}>
-                                <FaChargingStation style={{ fontSize: "30px",color: "white" }} />
-                            </div>
-                            :
-                            <div id={`slot-${slot.id}`} className={`w-50 p-2 border border-3 border-white ${slot.bike_id != 0 ? "bg-success" : "bg-danger"}`} onClick={() => RentBike(slot)}>
-                                <GiDutchBike style={{ fontSize: "30px",color: "white" }} />
-                            </div>
-                    )
-                    :
-                    null
+                                    <FaChargingStation style={{ fontSize: "30px",color: "white" }} />
+                                </div>
+                                :
+                                <div id={`slot-${slot.id}`} className={`w-50 p-2 border border-3 border-white ${slot.bike_id != 0 ? "bg-success" : "bg-danger"}`} onClick={() => RentBike(slot)}>
+                                    <GiDutchBike style={{ fontSize: "30px",color: "white" }} />
+                                </div>
+                        )
+                        :
+                        null
                     }
+                    </div>
                 </div>
+                {update}
             </Modal.Body>
             <Modal.Footer>
                 {del}
