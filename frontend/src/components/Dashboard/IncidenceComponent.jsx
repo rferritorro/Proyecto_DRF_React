@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import "./dashboard.css"
-import { Link } from 'react-router-dom'
 import { useIncidence } from "../../hooks/useIncidence";
-import {Link} from 'react-router-dom'
 import {AiFillCheckCircle} from "react-icons/ai"
 import {RiQuestionAnswerFill} from "react-icons/ri"
 import {MdCancel, MdSend} from "react-icons/md"

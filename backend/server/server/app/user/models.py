@@ -34,7 +34,7 @@ class User(models.Model):
             'id': self.id,
             'username': self.username,
             'exp': int(dt.timestamp())  
-        }, "django-insecure-p#@dw-g_c3n0!cj6#j)f&g2uzh&%l^lmb6f0!ivr^oe=2ul_5f", algorithm='HS256')
+        }, settings.SECRET_KEY, algorithm='HS256')
 
         return token.decode('utf-8')
     def __str__(self):
