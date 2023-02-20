@@ -4,12 +4,14 @@ import { JWTGetToken } from "../../services/JWTService";
 import { useIncidence } from "../../hooks/useIncidence";
 import Button from 'react-bootstrap/Button';
 import { Link } from "react-router-dom";
+import jwt_decode from "jwt-decode"
 
 const IncidenceCreateComponent = () => {
     const [valueIncidence, setIncidence] = useState()
     const {createIncidence} = useIncidence()
+    const id = jwt_decode(JWTGetToken())
     const formIncidence = {
-        "user_id": JWTGetToken()?.split("id_")[1],
+        "user_id": id.id,
         "description": valueIncidence,
         "answer": "",
         "state": "0"

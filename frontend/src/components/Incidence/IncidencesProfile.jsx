@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import {MdSend} from "react-icons/md"
 import { JWTGetToken } from "../../services/JWTService";
 import { useIncidence } from "../../hooks/useIncidence";
+import jwt_decode from "jwt-decode"
 
 const IncidenceProfile = () => {
     const {getIncidencesProfile} = useIncidence()
-    getIncidencesProfile(JWTGetToken()?.split("id_")[1])
+    const id = jwt_decode(JWTGetToken())
+    getIncidencesProfile(id.id)
     // useEffect(() => {
     // }, [getIncidencesProfile()])
     return (

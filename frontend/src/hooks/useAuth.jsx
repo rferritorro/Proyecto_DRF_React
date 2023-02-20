@@ -4,6 +4,7 @@ import JWTService from "../services/JWTService"
 import { useNavigate } from "react-router-dom";
 import UserContext from "../context/UserContext";
 import {  toast } from 'react-toastify';
+
 export function useAuth() {
     const navigate = useNavigate()
     const { users, setUser, jwt, setJWT, setIsAdmin, checkUser } = useContext(UserContext);
@@ -15,7 +16,8 @@ export function useAuth() {
                 setIsAdmin(true)
             })
             setUser(data)
-            JWTService.JWTPutToken(data.token + "id_" + data.id)
+            //JWTService.JWTPutToken(data.token + "id_" + data.id)
+            JWTService.JWTPutToken(data.token)
             JWTService.JWTPutTokenRef(data.ref_token)
             toast.success('LOGIN', {
                 position: "top-right",
@@ -47,7 +49,7 @@ export function useAuth() {
         AuthService.registerUser(data)
         .then(({data}) => {
             setUser(data)
-            JWTService.JWTPutToken(data.token + "id_" + data.id)
+            JWTService.JWTPutToken(data.token)
             JWTService.JWTPutTokenRef(data.ref_token)
             toast.success('REGISTER', {
                 position: "top-right",
