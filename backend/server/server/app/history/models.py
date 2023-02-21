@@ -14,6 +14,7 @@ class History(models.Model):
     slot_left = models.ForeignKey(Slots,related_name="slot_id_left",on_delete=models.DO_NOTHING,blank=True)
     bike = models.ForeignKey(Bike,related_name="bike",on_delete=models.DO_NOTHING)
     state = models.BooleanField()
+    date_reserved = models.DateField()
 
     def __str__(self):
         return str(self.id)

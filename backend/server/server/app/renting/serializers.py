@@ -12,6 +12,7 @@ from ..user.serializers import UserSerializer
 from ..station.serializers import StationSerializer
 from ..slots.serializers import SlotSerializer
 from ..bike.serializers import BikeSerializer
+from ..history.serializers import HistorySerializer
 
 class RentingSerializer(serializers.ModelSerializer):
     class Meta:
@@ -28,7 +29,7 @@ class RentingSerializer(serializers.ModelSerializer):
             "date":instance.date,                                    
         }
     
-    def allStations():
+    def allRenting():
         renting = Renting.objects.all()
         serializer = []
 
@@ -53,6 +54,16 @@ class RentingSerializer(serializers.ModelSerializer):
         bike_id = Bike.objects.get(id = context["bike"])
         bike_token=False
 
+        history_context = {
+            'user_id': user_id,
+            'slot_id': slot_id,
+            'bike_id': bike_id
+        }
+        try:
+            HistorySerializer.Addrecord(context=history_context)                
+        except Exception as e:
+            raise e
+
         if Renting.objects.filter(bike = context["bike"]).exists():
             raise serializers.ValidationError("Bike '{}' has been riding".format(context['bike']))
         renting = Renting.objects.create(
@@ -75,6 +86,11 @@ class RentingSerializer(serializers.ModelSerializer):
             return False
         try:
             Slots.objects.filter(id=context["slot_id"]).update(bike_id=data_token["bike_id"])
+            history_context = {
+                'slot_id': context["slot_id"],
+                'user_id': data_token["user_id"]
+            }
+            HistorySerializer.Updaterecord(context=history_context)
         except Exception as e:
             raise e
         

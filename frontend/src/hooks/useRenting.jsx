@@ -20,7 +20,7 @@ export function useRenting() {
                     theme: "dark",
                 })
                 setTimeout(() => {
-                    navigate("/stations")
+                    navigate("/history")
                 }, 200);
             }
         }).catch((error) => {
@@ -51,7 +51,7 @@ export function useRenting() {
                 })
                 setTimeout(() => {
                     setTimeout(() => {
-                        navigate("/stations")
+                        navigate("/history")
                     }, 200);
                 }, 200);
                 

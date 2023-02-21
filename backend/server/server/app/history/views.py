@@ -8,7 +8,7 @@ class HistoryView(viewsets.GenericViewSet):
 
     def GetHistoryByUser(self, request):
         serializer_context = {
-                'token': request.data["token_user"]
+            'token': request.data["token_user"]
         }
 
         serializer = HistorySerializer.GetHistoryByUser(context=serializer_context)
