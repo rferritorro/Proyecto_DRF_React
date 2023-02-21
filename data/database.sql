@@ -394,12 +394,44 @@ CREATE TABLE public.django_session (
 ALTER TABLE public.django_session OWNER TO root;
 
 --
+-- Name: history; Type: TABLE; Schema: public; Owner: root
+--
+
+CREATE TABLE public.history (
+    id integer NOT NULL,
+    user_id integer,
+    slot_rent_id integer,
+    slot_left_id integer,
+    state boolean,
+    bike_id integer,
+    date_reserved date
+);
+
+
+ALTER TABLE public.history OWNER TO root;
+
+--
+-- Name: history_id_seq; Type: SEQUENCE; Schema: public; Owner: root
+--
+
+ALTER TABLE public.history ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME public.history_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
 -- Name: profile; Type: TABLE; Schema: public; Owner: root
 --
 
 CREATE TABLE public.profile (
     id integer NOT NULL,
-    avatar character varying(500)
+    avatar character varying(500),
+    email character varying(100)
 );
 
 
@@ -714,6 +746,18 @@ COPY public.auth_permission (id, name, content_type_id, codename) FROM stdin;
 50	Can change renting	13	change_renting
 51	Can delete renting	13	delete_renting
 52	Can view renting	13	view_renting
+53	Can add alerts	14	add_alerts
+54	Can change alerts	14	change_alerts
+55	Can delete alerts	14	delete_alerts
+56	Can view alerts	14	view_alerts
+57	Can add history	15	add_history
+58	Can change history	15	change_history
+59	Can delete history	15	delete_history
+60	Can view history	15	view_history
+61	Can add incidence	16	add_incidence
+62	Can change incidence	16	change_incidence
+63	Can delete incidence	16	delete_incidence
+64	Can view incidence	16	view_incidence
 \.
 
 
@@ -763,8 +807,8 @@ COPY public.bike (id, state) FROM stdin;
 19	1
 18	1
 16	1
-2	1
 1	1
+2	1
 3	1
 \.
 
@@ -795,6 +839,9 @@ COPY public.django_content_type (id, app_label, model) FROM stdin;
 11	slots	slots
 12	bike	bike
 13	renting	renting
+14	alerts	alerts
+15	history	history
+16	incidence	incidence
 \.
 
 
@@ -837,15 +884,30 @@ COPY public.django_session (session_key, session_data, expire_date) FROM stdin;
 
 
 --
+-- Data for Name: history; Type: TABLE DATA; Schema: public; Owner: root
+--
+
+COPY public.history (id, user_id, slot_rent_id, slot_left_id, state, bike_id, date_reserved) FROM stdin;
+2	1	2	2	f	1	2023-01-24
+3	1	20	35	f	5	2023-01-22
+1	1	1	32	f	1	2023-01-24
+22	1	49	54	f	3	2023-02-21
+23	1	42	38	f	3	2023-02-21
+24	1	48	31	f	3	2023-02-21
+25	1	38	\N	t	3	2023-02-21
+\.
+
+
+--
 -- Data for Name: profile; Type: TABLE DATA; Schema: public; Owner: root
 --
 
-COPY public.profile (id, avatar) FROM stdin;
-1	https://rfef.isquad.es/images/afiliacion/48608808X.JPG
-2	https://rfef.isquad.es/images/afiliacion/48608659E.JPG
-3	https://go.dev/blog/gopher/gopher.png
-4	https://go.dev/blog/gopher/gopher.png
-5	https://go.dev/blog/gopher/gopher.png
+COPY public.profile (id, avatar, email) FROM stdin;
+2	https://rfef.isquad.es/images/afiliacion/48608659E.JPG	\N
+3	https://go.dev/blog/gopher/gopher.png	\N
+4	https://go.dev/blog/gopher/gopher.png	\N
+5	https://go.dev/blog/gopher/gopher.png	\N
+1	https://i.pinimg.com/170x/18/b9/ff/18b9ffb2a8a791d50213a9d595c4dd52.jpg	\N
 \.
 
 
@@ -864,6 +926,7 @@ COPY public.profile_profile (id, avatar) FROM stdin;
 COPY public.renting (id, user_id, station_id, slot_id, bike_id, date) FROM stdin;
 19	1	2	17	18	2023-01-24
 20	1	2	17	16	2023-01-24
+87	1	4	38	3	2023-01-02
 \.
 
 
@@ -882,7 +945,6 @@ COPY public.slot_station (id, name, lat, long, bikes) FROM stdin;
 COPY public.slots (id, station_id, bike_id, state) FROM stdin;
 4	2	0	f
 5	2	0	f
-6	2	0	f
 8	1	0	f
 9	1	0	f
 10	1	0	f
@@ -892,7 +954,6 @@ COPY public.slots (id, station_id, bike_id, state) FROM stdin;
 15	1	0	f
 16	2	0	f
 17	2	0	f
-18	2	0	f
 19	2	0	f
 20	2	0	f
 21	2	0	f
@@ -905,34 +966,21 @@ COPY public.slots (id, station_id, bike_id, state) FROM stdin;
 28	3	0	f
 29	3	0	f
 30	3	0	f
-31	3	0	f
 32	3	0	f
 33	3	0	f
 34	3	0	f
 35	3	0	f
 36	3	0	f
-37	4	0	f
-38	4	0	f
-39	4	0	f
-41	4	0	f
-42	4	0	f
 43	4	0	f
 44	4	0	f
-45	4	0	f
-46	4	0	f
 47	4	0	f
-48	4	0	f
-49	5	0	f
 50	5	0	f
 51	5	0	f
 52	5	0	f
 53	5	0	f
-54	5	0	f
 55	5	0	f
-56	5	0	f
 57	5	0	f
 58	5	0	f
-59	5	0	f
 60	5	0	f
 61	6	0	f
 62	6	0	f
@@ -944,14 +992,29 @@ COPY public.slots (id, station_id, bike_id, state) FROM stdin;
 68	6	0	f
 69	6	0	f
 70	6	0	f
-71	6	0	f
 72	6	0	f
 3	1	0	t
-7	1	2	f
 2	1	0	t
-14	1	1	f
 1	1	0	t
-40	4	3	f
+14	1	0	f
+71	6	1	f
+7	1	0	f
+40	4	0	f
+46	4	0	f
+41	4	3	f
+37	4	0	f
+6	2	0	f
+18	2	2	f
+45	4	0	f
+39	4	0	f
+56	5	3	f
+59	5	3	f
+49	5	0	f
+54	5	3	f
+42	4	0	f
+48	4	0	f
+31	3	3	f
+38	4	0	f
 \.
 
 
@@ -1010,7 +1073,7 @@ SELECT pg_catalog.setval('public.auth_group_permissions_id_seq', 1, false);
 -- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: root
 --
 
-SELECT pg_catalog.setval('public.auth_permission_id_seq', 52, true);
+SELECT pg_catalog.setval('public.auth_permission_id_seq', 64, true);
 
 
 --
@@ -1052,7 +1115,7 @@ SELECT pg_catalog.setval('public.django_admin_log_id_seq', 1, false);
 -- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: root
 --
 
-SELECT pg_catalog.setval('public.django_content_type_id_seq', 13, true);
+SELECT pg_catalog.setval('public.django_content_type_id_seq', 16, true);
 
 
 --
@@ -1060,6 +1123,13 @@ SELECT pg_catalog.setval('public.django_content_type_id_seq', 13, true);
 --
 
 SELECT pg_catalog.setval('public.django_migrations_id_seq', 22, true);
+
+
+--
+-- Name: history_id_seq; Type: SEQUENCE SET; Schema: public; Owner: root
+--
+
+SELECT pg_catalog.setval('public.history_id_seq', 25, true);
 
 
 --
@@ -1080,7 +1150,7 @@ SELECT pg_catalog.setval('public.profile_profile_id_seq', 1, false);
 -- Name: renting_id_seq; Type: SEQUENCE SET; Schema: public; Owner: root
 --
 
-SELECT pg_catalog.setval('public.renting_id_seq', 29, true);
+SELECT pg_catalog.setval('public.renting_id_seq', 87, true);
 
 
 --
@@ -1276,6 +1346,14 @@ ALTER TABLE ONLY public.django_migrations
 
 ALTER TABLE ONLY public.django_session
     ADD CONSTRAINT django_session_pkey PRIMARY KEY (session_key);
+
+
+--
+-- Name: history history_pkey; Type: CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY public.history
+    ADD CONSTRAINT history_pkey PRIMARY KEY (id);
 
 
 --
