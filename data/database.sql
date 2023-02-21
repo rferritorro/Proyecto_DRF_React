@@ -935,17 +935,7 @@ COPY public.django_session (session_key, session_data, expire_date) FROM stdin;
 --
 
 COPY public.incidence (id, user_id, description, answer, state) FROM stdin;
-13	8	prueba sbiosca                                                                                                                                        	                          prueba                                                                                                                      	1
-7	6	Mi madre no me deja alquilar y soy menor, me dejais una sin que se entere                                                                             	No nos hacemos cargo de ello                                                                                                                          	1
-15	7	bioskinnnnnnnnnnn                                                                                                                                     	hola señor bioskin                                                                                                                                    	1
-6	4	Me he estrellado con la bicicletea                                                                                                                    	Donde esta la bici?                                                                                                                                   	1
-37	7	aaaaaaaaaa                                                                                                                                            	oooooooo                                                                                                                                              	1
-22	2	las bicis no me funciona correctamente                                                                                                                	prueba                                                                                                                                                	1
-20	8	hola                                                                                                                                                  	hola                                                                                                                                                  	1
-3	1	La estacion almaig no me gusta                                                                                                                        	Gracias por avisarnos                                                                                                                                 	1
-23	2	prueba sbiosca                                                                                                                                        	aceptada                                                                                                                                              	1
-14	7	bioskin incidence                                                                                                                                     	 perfecto gracias                                                                                                                                     	1
-36	7	prueba bioskin                                                                                                                                        	contesto                                                                                                                                              	1
+\.
 -- Data for Name: history; Type: TABLE DATA; Schema: public; Owner: root
 --
 
