@@ -435,6 +435,7 @@ ALTER TABLE public.incidence ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
     INCREMENT BY 1
     NO MINVALUE
     MAXVALUE 10000
+);
 -- Name: history; Type: TABLE; Schema: public; Owner: root
 --
 
