@@ -6,14 +6,14 @@ import Button from 'react-bootstrap/Button';
 import { Link } from "react-router-dom";
 import jwt_decode from "jwt-decode"
 
-const IncidenceCreateComponent = () => {
+const IncidenceCreateComponent = (props) => {
     const [valueIncidence, setIncidence] = useState()
     const {createIncidence} = useIncidence()
     const id = jwt_decode(JWTGetToken())
     const formIncidence = {
         "user_id": id.id,
         "description": valueIncidence,
-        "answer": "",
+        "answer": null,
         "state": "0"
     }
     return (
@@ -23,7 +23,7 @@ const IncidenceCreateComponent = () => {
             <textarea onKeyUp={event => setIncidence(event.target.value)} rows="8" cols="50" /><p></p>
             <MdSend onClick={() => createIncidence(formIncidence)} style={{ fontSize: "60px" }} className="text-primary btn btn-link"/><p></p>
             <Link to={"/profile/incidences"}>
-                <Button variant="primary" className="m-3">
+                <Button variant="primary" className="m-3" onClick={() => props.checkIncidence()}>
                     Your Incidences
                 </Button>
             </Link>

@@ -7,10 +7,9 @@ import json
 from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.core.serializers import serialize
-from django.contrib.auth.hashers import check_password
 from ..profile.serializers import ProfileSerializer
 from django.core.serializers import serialize
-from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import make_password, check_password
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:

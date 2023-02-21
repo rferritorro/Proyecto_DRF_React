@@ -3,11 +3,16 @@ import AuthService from "../services/AuthService";
 import JWTService from "../services/JWTService"
 import { useNavigate } from "react-router-dom";
 import UserContext from "../context/UserContext";
+import IncidenceContext from "../context/IncidenceContext";
 import {  toast } from 'react-toastify';
+import NotificationContext from "../context/NotificationContext"
+import jwt_decode from "jwt-decode"
 
 export function useAuth() {
     const navigate = useNavigate()
     const { users, setUser, jwt, setJWT, setIsAdmin, checkUser } = useContext(UserContext);
+    const {incidenceProfile, setIncidenceProfile} = useContext(IncidenceContext)
+    const {checkNotificationContext} = useContext(NotificationContext)
     const login = useCallback((data) => {
         AuthService.loginUser(data)
         .then(({data}) => {
@@ -16,7 +21,7 @@ export function useAuth() {
                 setIsAdmin(true)
             })
             setUser(data)
-            //JWTService.JWTPutToken(data.token + "id_" + data.id)
+            checkNotificationContext(data.id)
             JWTService.JWTPutToken(data.token)
             JWTService.JWTPutTokenRef(data.ref_token)
             toast.success('LOGIN', {
@@ -49,6 +54,7 @@ export function useAuth() {
         AuthService.registerUser(data)
         .then(({data}) => {
             setUser(data)
+            checkNotificationContext(data.id)
             JWTService.JWTPutToken(data.token)
             JWTService.JWTPutTokenRef(data.ref_token)
             toast.success('REGISTER', {
@@ -88,6 +94,7 @@ export function useAuth() {
         navigate("/")
         setUser(null)
         setIsAdmin(false)
+        setIncidenceProfile(null)
         JWTService.JWTRemoveTokenRef()
         JWTService.JWTRemoveToken()
     }, [])
@@ -120,7 +127,17 @@ export function useAuth() {
         }
     }
 
+    const checkToken = () => {
+        if (jwt_decode(JWTService.JWTGetToken()).exp * 1000 >  Date.now()) {
+            console.log("OK TOKEN1")
+        }else if (jwt_decode(JWTService.JWTGetTokenRef()).exp * 1000 >  Date.now()) {
+            console.log("OK TOKEN2")
+        }else {
+            userlogout()
+        }
+    }
+
     return {
-         login, userLoged, userlogout, user: users, register, updateProfile
+         login, userLoged, userlogout, user: users, register, updateProfile, checkToken
     }
 }

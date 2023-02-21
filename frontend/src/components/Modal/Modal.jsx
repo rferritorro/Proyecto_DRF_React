@@ -95,13 +95,14 @@ const ModalComponent = (props) => {
         LeavingBike(
             {
                 "slot_id": SaveSlotId,
-                "token_bike":bike_token
+                "token_bike":bike_token,
+                "station_id": formUpdate.name 
             }
         )
     }
     const RentingBike = (station_id) => {
         // console.log(SaveBikeId,SaveSlotId,station_id)
-        const date =new Date().getFullYear()+"-"+new Date().getMonth()+"-"+new Date().getDay()
+        const date =new Date().getFullYear()+"-"+(new Date().getMonth()+1)+"-"+new Date().getDate()
         const data = {
             "user_id": localStorage.getItem('token'),
             "station_id": station_id,

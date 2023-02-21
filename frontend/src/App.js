@@ -8,6 +8,7 @@ import Stations from './pages/Stations'
 import Login from './pages/Login/Login'
 import Profile from './pages/Profile/Profile'
 import IncidenceProfile from './components/Incidence/IncidencesProfile'
+import Notifications from './pages/Notifications/Notifications'
 import Register from './pages/Login/Register'
 import Dashboard from './pages/Dashboard/Dashboard'
 import CreateStation from './components/Dashboard/stations/CreateStation';
@@ -16,6 +17,8 @@ import AuthGuardUser from "./services/AuthGuard/AuthGuardUser";
 import AuthGuardNotUser from "./services/AuthGuard/AuthGuardNotUser";
 import About from './pages/About/About'
 import {UserContextProvider} from './context/UserContext'
+import {IncidenceContextProvider} from './context/IncidenceContext'
+import {NotificationContextProvider} from './context/NotificationContext'
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import {  ToastContainer } from 'react-toastify';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -25,27 +28,31 @@ function App() {
     <div>
       <BrowserRouter>
         <UserContextProvider>
-          <Header />
-          <Routes>
-            <Route exact path='/' element={<Home />} />
-            <Route path='/stations' element={<Stations />} />
-            <Route path='/about' element={<About />} />
-            <Route element={<AuthGuardUser />}>
-              <Route path='/login' element={<Login />} />
-              <Route path='/register' element={<Register />} />
-            </Route>
-            <Route element={<AuthGuardNotUser />}>
-              <Route path='/profile' element={<Profile />} />
-              <Route path='/profile/incidences' element={<IncidenceProfile />} />
-            </Route>
-            <Route element={<AuthGuardAdmin />}>
-              <Route path='/history' element={<History />} />
-              <Route path='/dashboard/add_station' element={<CreateStation />} />
-              <Route path='/dashboard' element={<Dashboard />} />
-            </Route>
-          </Routes>
-          <ToastContainer />
-          <Footer />
+          <NotificationContextProvider>
+            <IncidenceContextProvider>
+              <Header />
+              <Routes>
+                <Route exact path='/' element={<Home />} />
+                <Route path='/stations' element={<Stations />} />
+                <Route path='/about' element={<About />} />
+                <Route element={<AuthGuardUser />}>
+                  <Route path='/login' element={<Login />} />
+                  <Route path='/register' element={<Register />} />
+                </Route>
+                <Route element={<AuthGuardNotUser />}>
+                    <Route path='/profile' element={<Profile />} />
+                    <Route path='/profile/incidences' element={<IncidenceProfile />} />
+                    <Route path='/notifications' element={<Notifications />} />
+                </Route>
+                <Route element={<AuthGuardAdmin />}>
+                  <Route path='/dashboard/add_station' element={<CreateStation />} />
+                  <Route path='/dashboard' element={<Dashboard />} />
+                </Route>
+              </Routes>
+              <ToastContainer />
+              <Footer />
+            </IncidenceContextProvider>
+          </NotificationContextProvider>
         </UserContextProvider>
       </BrowserRouter>
     </div>

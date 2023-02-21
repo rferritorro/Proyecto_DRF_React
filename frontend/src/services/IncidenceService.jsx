@@ -12,6 +12,9 @@ const IncidenceService = {
     },
     putAnswerAdmin(data, id) {
         return http().put("/server/incidence/putAnswer/"+ id, data)
+    },
+    deleteIncidence(id) {
+        return http().delete("/server/incidence/delete/" + id)
     }
 }
 
