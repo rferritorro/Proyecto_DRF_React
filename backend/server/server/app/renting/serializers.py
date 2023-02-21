@@ -19,14 +19,15 @@ class RentingSerializer(serializers.ModelSerializer):
             model = Renting
             fields = ('__all__')
             #fields = ('id', 'user_id', 'station_id', 'slot_id', 'bike_id', 'date')
-    def to_renting(instance):
+    def to_renting(instance, token):
         return {
             "id": instance.id,
             "user_id":instance.user_id,
             "station_id":instance.station_id,
             "slot_id":instance.slot_id,
             "bike_id":instance.bike_id,
-            "date":instance.date,                                    
+            "date":instance.date,
+            "bike_token": token                                
         }
     
     def allRenting():
@@ -45,6 +46,11 @@ class RentingSerializer(serializers.ModelSerializer):
             new_rent["bike_id"] = bike
             serializer.append(new_rent)
         return serializer
+
+    def getRentingId(id):
+        renting = Renting.objects.get(id=id)
+        renting_serializer = RentingSerializer.to_renting(renting, "null")
+        return renting_serializer
 
     def createRenting(context):
         user_decode = jwt.decode(context['user'], settings.SECRET_KEY)
@@ -73,12 +79,15 @@ class RentingSerializer(serializers.ModelSerializer):
             bike = bike_id,
             date = context["date"]
         )
-        serialized_renting = RentingSerializer.to_renting(renting)
+        serialized_renting = RentingSerializer.to_renting(renting, "null")
         if not serialized_renting:
             raise serializers.ValidationError("It ocurred an error in reserving")
         else: 
             bike_token = jwt.encode({'user_id': user_decode["id"],'bike_id': context["bike"]}, settings.SECRET_KEY, algorithm='HS256')
-        return bike_token
+            serialized_renting = RentingSerializer.to_renting(renting, bike_token)
+            station = StationSerializer.getOneStation(id = serialized_renting["station_id"])
+            serialized_renting["station_id"] = station
+        return serialized_renting
     
     def removeRenting(context):
         data_token = jwt.decode(context["token_bike"], settings.SECRET_KEY)
@@ -93,8 +102,7 @@ class RentingSerializer(serializers.ModelSerializer):
             HistorySerializer.Updaterecord(context=history_context)
         except Exception as e:
             raise e
-        
         deleted_rent = Renting.objects.filter(bike_id=data_token["bike_id"]).delete()
         if not deleted_rent:
             return False
-        return True
+        return [context,data_token["user_id"]]

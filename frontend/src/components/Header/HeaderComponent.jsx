@@ -1,12 +1,17 @@
-import React from "react";
+import React, {useContext} from "react";
 import './HeaderComponent.css'
 import {Link} from 'react-router-dom'
 import {FaUserCircle} from 'react-icons/fa'
 import {MdOutlineLogout, MdNotificationsActive} from 'react-icons/md'
 import {IoMdNotifications} from 'react-icons/io'
+import IncidenceContext from "../../context/IncidenceContext";
+import NotificationContext from "../../context/NotificationContext"
+import jwt_decode from "jwt-decode"
 
 const HeaderComponent = (props) => {
-    console.log(props)
+    const {checkIncidence} = useContext(IncidenceContext)
+    const {checkNotificationContext} = useContext(NotificationContext)
+    
     return (
         <nav className={`navbar navbar-expand-lg navbar-light ${props.dashPage ? "bg-dark": "bg-light"}`}>
                 <Link to={"/"} className="navbar-brand">
@@ -48,7 +53,7 @@ const HeaderComponent = (props) => {
                             {
                                 props.isAdmin ? 
                                 <Link to={"/dashboard"} className="nav-link">
-                                        <strong onClick={() => props.dashboardPage(true)} className={`h2 ${props.dashPage ? "text-success": "text-primary"}`}>Admin</strong>
+                                        <strong onClick={() => [props.dashboardPage(true), checkIncidence()]} className={`h2 ${props.dashPage ? "text-success": "text-primary"}`}>Admin</strong>
                                 </Link>:
                                 <li></li>
                             }
@@ -62,10 +67,15 @@ const HeaderComponent = (props) => {
                                 <Link to={"/profile"}>
                                     <img className="btn btn-link w-50" src={props.userData?.profile_id[0].avatar} />
                                 </Link>
-                                <button className="navbar-brand btn btn-link">
-                                    {/* <MdNotificationsActive style={{ fontSize: "20px" }} /> */}
-                                    <IoMdNotifications style={{ fontSize: "30px" }} />
-                                </button>
+                                <Link to={"/notifications"}>
+                                    <button className="navbar-brand btn btn-link" onClick={() => checkNotificationContext(jwt_decode(props.isToken).id)}>
+                                        {
+                                            props.notification.length != 0 ?
+                                            <MdNotificationsActive style={{ fontSize: "30px" }} />:
+                                            <IoMdNotifications style={{ fontSize: "30px" }} />
+                                        }
+                                    </button>
+                                </Link>
                                 <button className="navbar-brand btn btn-link">
                                     <MdOutlineLogout onClick={() => [props.isLogout(),props.dashboardPage(false)]} style={{ fontSize: "40px" }} />
                                 </button>

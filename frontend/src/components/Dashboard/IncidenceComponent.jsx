@@ -56,11 +56,11 @@ const IncidenceComponent = (props) => {
                                 <td>
                                     {
                                         viewAnswer && idAnswer == data.id ?
-                                        <RiQuestionAnswerFill onClick={() => [SetView(false), SetId(data.id)]} style={{ fontSize: "30px" }} />:
-                                        <RiQuestionAnswerFill onClick={() => [SetView(true), SetId(data.id)]} style={{ fontSize: "30px" }} className="text-primary"/>
+                                        <RiQuestionAnswerFill onClick={() => [SetView(false), SetId(data.id)]} style={{ fontSize: "60px" }} className="btn btn-click"/>:
+                                        <RiQuestionAnswerFill onClick={() => [SetView(true), SetId(data.id)]} style={{ fontSize: "60px" }} className="btn btn-click text-primary"/>
                                     }
-                                    <MdSend onClick={() => submit(data.id)} style={{ fontSize: "30px" }} className="text-primary"/>
-                                    <MdCancel onClick={() => SetView(false)} style={{ fontSize: "30px" }} className="text-danger"/>
+                                    <MdSend onClick={() => submit(data.id)} style={{ fontSize: "60px" }} className="btn btn-click text-primary"/>
+                                    <MdCancel onClick={() => props.deleteIncidence(data.id)} style={{ fontSize: "60px" }} className="btn btn-click text-danger"/>
                                 </td>:
                                 <td>
                                     <AiFillCheckCircle style={{ fontSize: "30px" }} className="text-success"/>

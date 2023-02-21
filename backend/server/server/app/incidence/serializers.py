@@ -2,7 +2,9 @@ from pyexpat import model
 from rest_framework import serializers
 from .models import Incidence
 import json
+from rest_framework.exceptions import NotFound
 from ..user.serializers import UserSerializer
+
 
 class IncidenceSerializer(serializers.ModelSerializer):
     class Meta:
@@ -30,12 +32,19 @@ class IncidenceSerializer(serializers.ModelSerializer):
 
         return serializer
 
+    def getIncidencesId(id):
+        incidence = Incidence.objects.get(id=id)
+        incidence_serializer = IncidenceSerializer.to_incidence(incidence)
+        return incidence_serializer
+
     def GetIncidenceProfile(id):
         incidence = Incidence.objects.filter(user_id=id)
         serializer = []
 
         for incidence in incidence.iterator():
             serializer_incidence = IncidenceSerializer.to_incidence(incidence)
+            user = UserSerializer.getUser(context={'id': serializer_incidence["user_id"]} )
+            serializer_incidence["user_id"] = user
             serializer.append(serializer_incidence)
 
         return serializer
@@ -52,4 +61,14 @@ class IncidenceSerializer(serializers.ModelSerializer):
     
     def putAnswer(data, id):
         Incidence.objects.bulk_update([Incidence(id=id, answer=data["answer"], state=data["state"])], fields=["answer", "state"])
+        incidence_serializer = IncidenceSerializer.getIncidencesId(id=id)
+        return incidence_serializer
+    
+    def deleteIncidence(id):
+        try:
+            incidence = Incidence.objects.get(id=id)
+        except incidence.DoesNotExist:
+            raise NotFound('Incidence not exist')
+
+        incidence.delete()
         return "Correcto"

@@ -26,6 +26,7 @@ class RentingView(viewsets.GenericViewSet):
         serializer_context = {
             'token_bike': request.data["token_bike"],
             'slot_id': request.data['slot_id'],
+            'station_id': request.data['station_id']
         }
         serializer = RentingSerializer.removeRenting(context=serializer_context)
         return Response(serializer, status=status.HTTP_200_OK)
