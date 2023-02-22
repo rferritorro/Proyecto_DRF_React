@@ -1,0 +1,29 @@
+
+@media only screen and (max-width: 760px)
+{
+    .image-default {
+        width: 70%;
+        padding: 0%;
+        margin: 5%;
+        height: 300px;
+    }
+    .history-info {
+        display: flex;
+        justify-content: center;
+    }
+
+}
+
+@media only screen and (min-width: 1200px )
+{
+    .image-default {
+        width: 100%;
+    }
+    .history-info {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+

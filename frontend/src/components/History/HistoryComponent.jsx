@@ -15,9 +15,10 @@ const HistoryComponent = () => {
     const ShowInfoOfHistory = (OneHistoryInfo) => {
         SetOneInfoHistory(OneHistoryInfo)
     }
-
     return (
+        
         <div className="w-100 vh-100 d-flex">
+
             <div className="w-25 h-100 p-3 d-flex flex-column overflow-scroll">
             {
                 history
@@ -34,7 +35,7 @@ const HistoryComponent = () => {
                     <h1>No has hecho ninguna reserva</h1>
             }
             </div>
-            <div className={`w-75 h-auto ${OneInfoHistory.slot_id_left ? '' : 'd-flex justify-content-center align-items-center' }`}>
+            <div className={`w-75 h-auto ${OneInfoHistory.slot_id_left ? '' : 'history-info' }`}>
                 {
                     OneInfoHistory
                     ?
@@ -95,7 +96,7 @@ const HistoryComponent = () => {
                     </div>
 
                     :
-                    <img className="w-100" src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/59/14/cd/caption.jpg?w=1200&h=-1&s=1" alt=""/>
+                    <img className="image-default" src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/59/14/cd/caption.jpg?w=1200&h=-1&s=1" alt=""/>
                 }
             </div>
         </div>
