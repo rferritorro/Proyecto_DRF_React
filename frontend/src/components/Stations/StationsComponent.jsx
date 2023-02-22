@@ -28,7 +28,7 @@ const StationComponent = () => {
                     token_bike
                     ?
                         <div className="w-50 bg-success text-center border rounded-5">
-                            <h3>You are riding now!!</h3>
+                            <h3 className="info-text">You are riding now!!</h3>
                         </div>
                     :
                         null

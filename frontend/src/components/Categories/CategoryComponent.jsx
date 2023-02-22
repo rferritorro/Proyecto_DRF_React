@@ -104,31 +104,31 @@ const CategoryComponent = () => {
         setIsFlippedSlot(prevState => !prevState);
     };
         return (
-        <div className="category">
+        <div className="category p-5">
             <div className="categorys">
             <div>
                 <Link to={"/stations"} className="header_decoration text-dark">
-                    <GiChemicalTank style={{ fontSize: "180px" }} />
+                    <GiChemicalTank className="categoryLogo" />
                 </Link>
             </div>
             </div>
             <div className="categorys">
                 <ReactCardFlip isFlipped={isFlippedSlot} flipDirection="horizontal">
                     <div onClick={handleClickSlot} className="header_decoration">
-                        <FaChargingStation style={{ fontSize: "180px" }} />
+                        <FaChargingStation className="categoryLogo" />
                     </div>
                     <div onClick={handleClickSlot}>
-                        <Doughnut data={data_bike} />
+                        <Doughnut className="stadistic" data={data_bike} options={{ maintainAspectRatio: false }}/>
                     </div>
                 </ReactCardFlip>
             </div>
             <div className="categorys">
                 <ReactCardFlip isFlipped={isFlippedBike} flipDirection="horizontal">
                     <div onClick={handleClickBike} className="header_decoration">
-                        <GiDutchBike style={{ fontSize: "180px" }} />
+                        <GiDutchBike className="categoryLogo" />
                     </div>
                     <div onClick={handleClickBike} className="header_decoration">
-                        <Doughnut data={data_slots} />
+                        <Doughnut className="stadistic" data={data_slots} options={{ maintainAspectRatio: false }}/>
                     </div>
                 </ReactCardFlip>
             </div>
