@@ -42,8 +42,8 @@ const HistoryComponent = () => {
                     <div className={`d-flex history-data p-5 w-100 `}>
                         <div style={{width: "37,5%" }} className={`text-center ${OneInfoHistory.slot_id_left ? '' : 'w-100' }`}>
                             <h1>Start Station</h1>
-                            <img  style={{width: "100%" }} src={OneInfoHistory.slot_id_rent.station_id.img} alt="" />
-                            <table class="table table-striped mt-3 border border-dark">
+                            <img className={`${OneInfoHistory.slot_id_left ? 'size-img' : 'w-100'}`} src={OneInfoHistory.slot_id_rent.station_id.img} alt="" />
+                            <table className="table table-striped mt-3 border border-dark">
                                 <thead>
                                     <tr>
                                         <td>Street</td>
@@ -61,7 +61,7 @@ const HistoryComponent = () => {
                         {
                             OneInfoHistory.slot_id_left
                             ?
-                            <div className="w-25 d-none d-flex justify-content-center align-items-center">
+                            <div className="w-25 out-it d-flex justify-content-center align-items-center">
                                 <MdDoubleArrow style={{ fontSize: "35px" }}/>
                             </div>
                             :
@@ -73,8 +73,8 @@ const HistoryComponent = () => {
                                 ?
                                 <div style={{width: "100%" }}>
                                     <h1>End Station</h1>  
-                                    <img style={{width: "100%" }} src={OneInfoHistory.slot_id_left.station_id.img} alt="" />
-                                    <table class="table table-striped mt-3 border border-dark">
+                                    <img className="img-size" src={OneInfoHistory.slot_id_left.station_id.img} alt="" />
+                                    <table className="table table-striped mt-3 border border-dark">
                                         <thead>
                                             <tr>
                                                 <td>Street</td>
