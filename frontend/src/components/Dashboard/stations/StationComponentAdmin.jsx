@@ -1,6 +1,6 @@
 import React, { useState, Suspense } from "react";
 import {useNavigate} from "react-router-dom"
-import '../../Stations/StationsComponent.css'
+import "../dashboard.css"
 import Button from 'react-bootstrap/Button';
 import {Link} from 'react-router-dom'
 import {MdDelete} from 'react-icons/md'

@@ -1,0 +1,58 @@
+@media only screen and (max-width: 760px ) {
+
+    .divProfile {
+        margin: 8%;
+    }
+
+    .usernameProfile{
+        padding: 1%;  
+    }
+
+    .husername {
+        font-size: 100%;
+    }
+    
+    .imgProfile {
+        margin: 2%;
+        width: 40%;
+    }
+
+    .divIncidences{
+       width: 100%;
+       margin-top: 5%;
+       padding: 5%;
+    }
+
+    .textAreaIncidence {
+        height: 10em;
+        width: 17em;
+    }
+
+}
+
+
+
+@media only screen and (min-width: 1200px ) {  
+    .divProfile {
+        margin: 5%;
+    }
+
+    .usernameProfile{
+        padding: 2%;   
+    }
+
+    .imgProfile {
+        width: 20%;
+    }
+
+    .divIncidences{
+        width: 100%;
+        margin-top: 5%;
+        padding: 2%;
+    }
+
+    .textAreaIncidence {
+        height: 15em;
+        width: 45em;
+    }
+}

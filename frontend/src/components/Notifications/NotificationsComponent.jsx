@@ -35,24 +35,20 @@ const NotificationsComponent = (props) => {
                                 <Link to={"/profile/incidences"} className={"text-black text-decoration-none"}>
                                     {
                                         data.type == 1 ?
-                                        <div className={`bg-light rounded-3 w-25 mx-auto d-flex flex-row`} onClick={() => props.checkIncidence()}>
+                                        <div className={`bg-light rounded-3 mx-auto divMessages`} onClick={() => props.checkIncidence()}>
                                             <div>
                                                 <ul>
-                                                    <li><strong>Answer of Administrator:</strong></li><p></p>
+                                                    <li><strong>Answer of Administrator:</strong></li>
+                                                    <p>&nbsp;{data.incidence_id?.answer}</p>
                                                 </ul>
                                             </div>
-                                            <div>
-                                                <p>&nbsp;{data.incidence_id?.answer}</p>
-                                            </div>
                                         </div>:
-                                        <div className={`bg-light rounded-3 w-25 mx-auto`} onClick={() => props.checkIncidence()}>
+                                        <div className={`bg-light rounded-3 mx-auto divMessages`} onClick={() => props.checkIncidence()}>
                                         <div>
                                             <ul>
-                                                <li><strong>Message pending answer of Administrator:</strong></li><p></p>
+                                                <li><strong>Message pending answer of Administrator:</strong></li>
+                                                <p>&nbsp;{data.incidence_id?.description}</p>
                                             </ul>
-                                        </div>
-                                        <div>
-                                            <p>&nbsp;{data.incidence_id?.description}</p>
                                         </div>
                                     </div>
                                     }
@@ -62,7 +58,7 @@ const NotificationsComponent = (props) => {
                             <div className="m-2">
                                 {data.date.replace('T', ' ')}
                             </div>
-                        </div><hr className="w-25 d-flex mx-auto"></hr>
+                        </div><hr className="hrAlert"></hr>
                     </div>
                 ))
             }

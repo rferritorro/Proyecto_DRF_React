@@ -23,7 +23,7 @@ const IncidenceComponent = (props) => {
     return (
         <div className="m-5">
             <h3 className="text-center text-primary"><u>INCIDENCES</u></h3><p></p>
-            <table className="table table-striped p-3 table-bordered table-hover">
+            <table className="table table-striped p-3 table-bordered table-hover table-responsive tbl-header ">
                     <thead className="thead-dark">
                         <tr>
                             <th className="inc">Id_Incidence</th>
@@ -33,9 +33,6 @@ const IncidenceComponent = (props) => {
                             <th>Operations</th>
                         </tr>
                     </thead>
-            </table>
-            <div class="tbl-header">
-                <table className="table table-striped p-3 table-bordered table-hover">
                     <tbody>
                         {props.incidence?.map((data, index) => (
                             <tr>
@@ -70,8 +67,9 @@ const IncidenceComponent = (props) => {
                             </tr>
                         ))}
                     </tbody>
-                </table>
-            </div>
+
+            </table>
+            
         </div>
     )
 }

@@ -6,7 +6,7 @@ const RentingComponent = (props) => {
     return (
         <div className="m-5">
             <h3 className="text-center text-primary"><u>RENTS</u></h3><p></p>
-            <table className="table table-striped p-3 table-bordered table-hover">
+            <table className="table table-striped p-3 table-bordered table-hover table-responsive tbl-header">
                 <thead className="thead-dark">
                     <tr>
                         <th scope="col" className="rent">Id_Rent</th>
@@ -17,10 +17,7 @@ const RentingComponent = (props) => {
                         <th scope="col" className="dat">Date</th>
                     </tr>
                 </thead>
-            </table>
-            <div class="tbl-header">
-                <table className="table table-striped p-3 table-bordered table-hover">
-                    <tbody>
+                <tbody>
                             {props.rents?.map((data, index) => (
                                 // <tr className={`${!data.slot_id.state ? "bg-warning": ""} `}>
                                 <tr>
@@ -33,8 +30,7 @@ const RentingComponent = (props) => {
                                 </tr>    
                             ))}
                     </tbody>
-                </table>
-            </div>
+            </table>
         </div>
     )
 }

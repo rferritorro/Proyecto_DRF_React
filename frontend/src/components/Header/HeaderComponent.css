@@ -1,22 +1,80 @@
-/* @media only screen and (max-width: 760px ) {    
+ @media only screen and (max-width: 760px ) {    
     .principalMain {
         gap: 10px;
     }
     
-    .infor {
-        font-size: 100px;
-        gap: 10px;
+    .userLoged {
+        width: 45%;
+        margin-left: 3% ;
+        border-radius: 4px;
     }
-    .logo {
-        width: 58%;
+    .logo-header {
+        width: 40px;
+        margin: 40%;
     }
-    
+    .logo-header {
+        height: 40px;
+        object-fit: cover;
+        border-radius: 50%;
+        box-shadow: 0px 0px 4px #5f5f5f,
+            0px 0px 0px 2px #ecf0f3,
+            8px 8px 15px #a7aaa7,
+            -8px -8px 15px #fff;
+    }
     .avatar {
-        width: 60%;
+        width: 45%;
+        height: 45%;
+        border-radius: 50%;        
+    }
+    .button-navbar {
+        margin: 2%;
+    }
+    .navbar-toggler-icon {
+        font-size: 15px;
+    }
+    .defaultUser {
+        font-size: 40px;
+    }
+    .iconLogout, .iconAlert {
+        font-size: 20px;
+    }
+
+    .iconAlertWhite {
+        color: white;
     }
     
 }
+@media only screen and (min-width: 1200px ) {     
+    .principalMain {
+        gap: 350px;
+    }
+    
+    .userLoged {
+        width: 50%;
+        margin-left: 45%;
+        border-radius: 4px;
+    }
+    .logo-header {
+        width: 30%;
+        margin: 4%;
+    }
 
+    .defaultUser {
+        font-size: 100px;
+    }
+    
+    .avatar {
+        width: 45%;
+    }
+    .iconAlert {
+        font-size: 25px;
+    }
+
+    .iconAlertWhite {
+        color: white;
+    }
+}
+/*
 @media only screen and (max-width: 1900px ) {
     .principalMain {
         gap: 180px;
@@ -34,23 +92,7 @@
     }
     
 }
-@media only screen and (min-width: 1900px ) {     
-    .principalMain {
-        gap: 350px;
-    }
-    
-    .infor {
-        font-size: 30px;
-        gap: 270px;
-    }
-    .logo {
-        width: 70%;
-    }
-    
-    .avatar {
-        width: 50%;
-    }
-}
+
 
 .headerComponent {
     background-color: rgb(244, 249, 250);
@@ -77,8 +119,3 @@
     text-align: center;
 } */
 
-.infor {
-    width: 50%;
-    margin-left: 45%;
-    border-radius: 4px;
-}

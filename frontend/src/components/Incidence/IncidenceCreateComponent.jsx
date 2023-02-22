@@ -5,6 +5,7 @@ import { useIncidence } from "../../hooks/useIncidence";
 import Button from 'react-bootstrap/Button';
 import { Link } from "react-router-dom";
 import jwt_decode from "jwt-decode"
+import "../Profile/ProfileComponent.css"
 
 const IncidenceCreateComponent = (props) => {
     const [valueIncidence, setIncidence] = useState()
@@ -20,7 +21,7 @@ const IncidenceCreateComponent = (props) => {
         <div className="m-5 text-center">
             <h3 className="text-primary"><u>Do you have any problem?</u></h3><p></p>
             <p className="text-primary">Add your incidence</p>
-            <textarea onKeyUp={event => setIncidence(event.target.value)} rows="8" cols="50" /><p></p>
+            <textarea onKeyUp={event => setIncidence(event.target.value)} className="textAreaIncidence"/><p></p>
             <MdSend onClick={() => createIncidence(formIncidence)} style={{ fontSize: "60px" }} className="text-primary btn btn-link"/><p></p>
             <Link to={"/profile/incidences"}>
                 <Button variant="primary" className="m-3" onClick={() => props.checkIncidence()}>

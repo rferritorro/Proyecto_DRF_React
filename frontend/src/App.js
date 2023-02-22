@@ -35,6 +35,7 @@ function App() {
                 <Route exact path='/' element={<Home />} />
                 <Route path='/stations' element={<Stations />} />
                 <Route path='/about' element={<About />} />
+                <Route path='/history' element={<History />} />
                 <Route element={<AuthGuardUser />}>
                   <Route path='/login' element={<Login />} />
                   <Route path='/register' element={<Register />} />

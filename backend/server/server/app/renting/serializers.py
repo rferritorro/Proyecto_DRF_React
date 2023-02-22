@@ -35,7 +35,7 @@ class RentingSerializer(serializers.ModelSerializer):
         serializer = []
 
         for renting in renting.iterator():
-            new_rent = RentingSerializer.to_renting(renting)
+            new_rent = RentingSerializer.to_renting(renting, "null")
             user = UserSerializer.getUser(context={'id': new_rent["user_id"]} )
             station = StationSerializer.getOneStation(id = new_rent["station_id"])
             slot = SlotSerializer.getSlot(id= new_rent["slot_id"])

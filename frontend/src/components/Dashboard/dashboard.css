@@ -1,3 +1,52 @@
+@media only screen and (max-width: 760px ) {
+
+    .stationsDiv {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    
+    .stationsDivMap {
+        height: 350px;
+        width: 285px;
+        margin-top: 5%;
+        background-color: rgb(181, 254, 255);
+    }
+    
+    .stationDescr {
+        text-align: center;
+        font-size: 140%;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    
+    
+}
+
+@media only screen and (min-width: 1200px ) {
+    .stationsDiv {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+    
+    .stationsDivMap {
+        height: 450px;
+        width: 400px;
+        margin: 2%;
+        background-color: rgb(181, 254, 255);
+    }
+    
+    .stationDescr {
+        text-align: center;
+        font-size: 140%;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    
+
+}
+
+
+
 .tbl-header {
     overflow:auto; 
     max-height:300px;
@@ -18,3 +67,8 @@
 .stat {
     width: 250px;
 }
+
+.stationComponentAdmin {
+    background-color: rgb(217, 230, 255);
+}
+

@@ -21,15 +21,17 @@ export function useNotification() {
         .then(({data}) => {
             console.log(data)
             if (data.type != 1) {
-                toast.success('🔔 You have a new notification!', {
-                    position: "top-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                })
+                setTimeout(() => {
+                    toast.success('🔔 You have a new notification!', {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    })
+                }, 1000);
             }
         })
         .catch((error) => {

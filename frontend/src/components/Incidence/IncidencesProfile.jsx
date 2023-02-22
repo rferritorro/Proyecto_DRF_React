@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import IncidenceContext from "../../context/IncidenceContext";
+import "../Profile/ProfileComponent.css"
 
 const IncidenceProfile = () => {
     const {incidenceProfile} = useContext(IncidenceContext)
@@ -10,22 +11,17 @@ const IncidenceProfile = () => {
             <div className="d-flex flex-column">
             {
                 incidenceProfile?.map((data, index) => (
-                    <div className={`${data.answer ? "bg-success": "bg-warning"} m-5 p-4 d-flex flex-row`}>
+                    <div className={`${data.answer ? "bg-success": "bg-warning"} divIncidences`}>
                         <div>
                             <ul>
-                                <li><strong>Description of Incidence:</strong></li><p></p>
-                                <li><strong>Answer of Administrator:</strong></li><p></p>
-                                <li><strong>State:</strong></li>
+                                <li><strong>Description of Incidence: </strong>&nbsp;{data.description}</li><p></p>
+                                <li><strong>Answer of Administrator: </strong>&nbsp;{data.answer}</li><p></p>
+                                <li><strong>State: </strong>{
+                                    data.state == 0 ?
+                                        <span>Pending</span> :
+                                        <span>Accepted</span>
+                                }</li>
                             </ul>
-                        </div>
-                        <div>
-                            <p>&nbsp;{data.description}</p>
-                            <p>&nbsp;{data.answer}</p>
-                            {
-                                data.state == 0 ?
-                                <p>Pending</p>:
-                                <p>Accepted</p>
-                            }
                         </div>
                     </div>
                 ))

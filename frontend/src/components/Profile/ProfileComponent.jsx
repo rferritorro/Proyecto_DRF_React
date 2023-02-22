@@ -16,9 +16,9 @@ const ProfileComponent = (props) => {
         "password": valuePassword ? valuePassword: props.userData?.password,
     }
     return (
-        <div className="border text-center m-5">
-            <div className="bg-primary p-3 text-center">
-                <h5>
+        <div className="border text-center divProfile">
+            <div className="bg-primary usernameProfile">
+                <h5 className="husername">
                     <strong>Username: </strong>
                     {
                         props.update ?
@@ -28,14 +28,14 @@ const ProfileComponent = (props) => {
                 </h5>
             </div>
             <hr></hr>
-            <strong>Email:</strong>
+            <strong className="husername">Email:</strong>
             {
                 props.update ?
                 <input type="text" onKeyUp={event => setEmail(event.target.value)} className="m-2 text-center bg-transparent" defaultValue={formProfile.email}/>:
                 <input type="text" readOnly className="m-2 text-center bg-transparent border-0" value={formProfile.email}/>
             }
             <p></p>
-            <strong>Password:</strong>
+            <strong className="husername">Password:</strong>
             {
                 props.eye ?
                 <input type="text" onKeyUp={event => setPassword(event.target.value)} className="m-2 text-center bg-transparent" defaultValue={formProfile.password}/>:
@@ -55,7 +55,7 @@ const ProfileComponent = (props) => {
            
 
             <div>
-                <img className="w-25 m-3" src={formProfile.avatar} />
+                <img className="imgProfile" src={formProfile.avatar} />
                 <p></p>
                 {
                     props.update ?
