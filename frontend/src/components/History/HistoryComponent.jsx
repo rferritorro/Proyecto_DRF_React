@@ -19,12 +19,12 @@ const HistoryComponent = () => {
         
         <div className="w-100 vh-100 d-flex">
 
-            <div className="w-25 h-100 p-3 d-flex flex-column overflow-scroll">
+            <div className="box-list-history h-100 p-3 d-flex flex-column  overflow-scroll">
             {
                 history
                 ?
                     history.map((reserved) =>
-                        <div className={`border m-2 border-dark w-100 p-3 ${reserved.state ? 'bg-success' : 'bg-secondary' }`} >
+                        <div className={`box-history ${reserved.state ? 'bg-success' : 'bg-secondary' }`} >
                             <div className="float-start">
                                 <h5>Reserva realizada {reserved.date_reserved}</h5>
                             </div>
@@ -32,15 +32,15 @@ const HistoryComponent = () => {
                         </div>
                     )
                 :
-                    <h1>No has hecho ninguna reserva</h1>
+                    <h1 className="text-white">No has hecho ninguna reserva</h1>
             }
             </div>
             <div className={`w-75 h-auto ${OneInfoHistory.slot_id_left ? '' : 'history-info' }`}>
                 {
                     OneInfoHistory
                     ?
-                    <div className={`d-flex flex-row p-5 ${OneInfoHistory.slot_id_left ? 'w-100' : 'w-75' }`}>
-                        <div style={{width: "37.5%" }} className={`text-center ${OneInfoHistory.slot_id_left ? '' : 'w-100' }`}>
+                    <div className={`d-flex history-data p-5 ${OneInfoHistory.slot_id_left ? 'w-100' : 'w-100' }`}>
+                        <div style={{width: "37,5%" }} className={`text-center ${OneInfoHistory.slot_id_left ? '' : 'w-100' }`}>
                             <h1>Start Station</h1>
                             <img  style={{width: "100%" }} src={OneInfoHistory.slot_id_rent.station_id.img} alt="" />
                             <table class="table table-striped mt-3 border border-dark">
@@ -61,7 +61,7 @@ const HistoryComponent = () => {
                         {
                             OneInfoHistory.slot_id_left
                             ?
-                            <div className="w-25 d-flex justify-content-center align-items-center">
+                            <div className="w-25 d-none d-flex justify-content-center align-items-center">
                                 <MdDoubleArrow style={{ fontSize: "35px" }}/>
                             </div>
                             :

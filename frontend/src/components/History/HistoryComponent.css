@@ -1,5 +1,5 @@
 
-@media only screen and (max-width: 760px)
+@media only screen and (max-width: 600px)
 {
     .image-default {
         width: 70%;
@@ -12,10 +12,33 @@
         justify-content: center;
     }
 
+    .box-history {
+        border: 2px solid black;
+        width: 100%;
+        padding: 2.5%;
+    }
+
+    .box-list-history {
+        width: 50%;
+        background-color: black;
+    }
+
+    .history-data {
+        flex-direction: column;
+    }
+    .history-data div {
+        width: 100% !important;
+    }
+    .d-none {
+        display: none;
+    }
 }
 
 @media only screen and (min-width: 1200px )
 {
+    .history-data {
+        flex-direction: row;
+    }
     .image-default {
         width: 100%;
     }
@@ -24,6 +47,14 @@
         justify-content: center;
         align-items: center;
     }
+    .box-list-history {
+        width: 25%;
+    }
 }
 
+    .box-history {
+        border: 2px solid black;
+        width: 100%;
+        padding: 2.5%;
+    }
 
