@@ -29,8 +29,11 @@
     .history-data div {
         width: 100% !important;
     }
-    .d-none {
-        display: none;
+    .img-size {
+        width: 150px !important;
+    }
+    .size-img {
+        width: 150px !important;
     }
 }
 
@@ -50,11 +53,18 @@
     .box-list-history {
         width: 25%;
     }
+    .img-size {
+        width: 500px;
+    }
 }
 
     .box-history {
         border: 2px solid black;
         width: 100%;
         padding: 2.5%;
+    }
+
+    .size-img {
+        width: 500px;
     }
 
