@@ -20,16 +20,17 @@
         width: 80%;
     }
     .text {
-        width: 40%;
+        width: 45%;
         padding: 1.5%;
-        margin: 5% 0%;
+        margin: 5% 1.5%;
+        font-size: 13.5px;
     }
     .text div {
         width: 75%;
     }
     .text div div {
         width: 100%;
-        height: 300px;
+        height: 400px;
     }
 }
 
