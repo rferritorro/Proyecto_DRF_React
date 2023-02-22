@@ -1,40 +1,17 @@
-/* .modal, .modal2 {
-    position: fixed;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 10%;
-    height: 10%;
-    padding: 10%;
-    margin: 15%;
-    margin-left: 35%;
-    opacity: 0;
-    transition: all 0.3s ease-in-out;
-    pointer-events: none;
-    z-index: 1;
+@media only screen and (max-width: 600px)
+{
+    .icon {
+        font-size: 20px;
+        color: white;
+        padding: 1.5%;
+    }
 }
 
-
-.imglogo {
-    width: 500%;
-
+@media only screen and (min-width: 1200px )
+{
+    .icon {
+        font-size: 30px;
+        color: white;
+    }
 }
 
-.modal2 {
-    background-color: rgb(128, 255, 255);
-}
-
-
-
-.modal.show, .modal2.show {
-    opacity: 1;
-    pointer-events: visible;
-}
-
-.welcome {
-    text-align: justify;
-} */

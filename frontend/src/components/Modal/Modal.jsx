@@ -175,11 +175,11 @@ const ModalComponent = (props) => {
                             token_bike
                             ?
                             <div id={`slot-${slot.id}`} className={`w-50 p-2 border border-3 border-white ${slot.bike_id == 0 ? "bg-success" : "bg-danger"}`} onClick={() => RentBike(slot)}>
-                                    <FaChargingStation style={{ fontSize: "30px",color: "white" }} />
+                                    <FaChargingStation className="icon" />
                                 </div>
                                 :
                                 <div id={`slot-${slot.id}`} className={`w-50 p-2 border border-3 border-white ${slot.bike_id != 0 ? "bg-success" : "bg-danger"}`} onClick={() => RentBike(slot)}>
-                                    <GiDutchBike style={{ fontSize: "30px",color: "white" }} />
+                                    <GiDutchBike className="icon" />
                                 </div>
                         )
                         :
