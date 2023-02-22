@@ -23,7 +23,7 @@ const IncidenceComponent = (props) => {
     return (
         <div className="m-5">
             <h3 className="text-center text-primary"><u>INCIDENCES</u></h3><p></p>
-            <table className="table table-striped p-3 table-bordered table-hover table-responsive tbl-header ">
+            <table className="table table-striped p-3 table-bordered table-hover table-responsive tbl-header">
                     <thead className="thead-dark">
                         <tr>
                             <th className="inc">Id_Incidence</th>
