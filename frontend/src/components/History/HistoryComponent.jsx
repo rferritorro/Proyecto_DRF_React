@@ -39,7 +39,7 @@ const HistoryComponent = () => {
                 {
                     OneInfoHistory
                     ?
-                    <div className={`d-flex history-data p-5 ${OneInfoHistory.slot_id_left ? 'w-100' : 'w-100' }`}>
+                    <div className={`d-flex history-data p-5 w-100 `}>
                         <div style={{width: "37,5%" }} className={`text-center ${OneInfoHistory.slot_id_left ? '' : 'w-100' }`}>
                             <h1>Start Station</h1>
                             <img  style={{width: "100%" }} src={OneInfoHistory.slot_id_rent.station_id.img} alt="" />
